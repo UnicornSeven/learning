@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="styles/style.css">
   <title>SQL</title>
 </head>
 <body>
@@ -36,6 +37,11 @@
       <div class="content">
          <h3>了解SQL</h3>
          <h4>数据库基础</h4>
+         <ul>
+           <li>什么是SQL</li>
+           <li>SQL有什么用</li>
+           <li>基本的数据库术语</li>
+         </ul>
          <ol>
              <li>数据库是一个以某种有组织的方式存储的数据集合</li>
              <li>数据库「database」保存有组织的数据的容器</li>
@@ -48,6 +54,54 @@
              <li>行「row」表中的一个记录「record」</li>
              <li>主键「primary key」一列（或一组列），其值能够唯一标识表中的每一行。表中的任何列都可以作为主键，只要它满足以下条件：任意两行都不具有相同的主键值；每一行都必须具有一个主键值（主键列不允许NULL值）；主键列中的值不允许修改或更新；主键值不能重用（如果某行从表中删除，它的主键不能赋给以后的新行）</li>
          </ol>
+         <h4>什么是SQL</h4>
+         <ol>
+           <li>SQL是一种专门用来与数据库沟通的语言，是Structured Query Language（结构化查询语言）的缩写。设计SQL的目的是为了提供一种从数据库中读写数据的简单有效的方法。</li>
+           <li>SQL的优点：几乎所有DBMS都支持SQL；SQL简单易学；SQL灵活易用，可进行非常复杂和高级的数据库操作。</li>
+         </ol>
+      </div>
+      <div class="content">
+        <h3>检索数据</h3>
+        <ul>
+          <li>如何使用SQL的SELECT语句来检索单个列表、多个列表以及所有列表</li>
+          <li>如何返回不同的值</li>
+          <li>如何注释代码</li>
+        </ul>
+        <h4>SELECT语句</h4>
+        <ol>
+          <li>关键词「keyword」作为SQL组成部分的保留字。关键字不能用作表或列的名字。</li>
+          <li>每个SQL语句都是由一个或多个关键字构成的</li>
+          <li>检索单个列：必须给出两个条件，想选择什么以及从哪选择。例如，利用SELECT语句从Products表中检索一个名为prod_name的列。返回的是表中所有行，未过滤也未排序的数据。</li>
+          <li>多条SQL语句必须以分号分隔</li>
+          <li>SQL语句不区分大小写</li>
+          <li>在处理SQL语句时，所有空格都被忽略</li>
+          <li>检索多个列：列名之间必须以逗号分隔</li>
+          <li>检索所有列：使用星号通配符；列的顺序一般是列在表定义中出现的物理顺序（数据返回给应用程序，根据需要进行格式化，再表示出来）</li>
+          <li>检索不同的值：使用「DISTINCT」关键字，它指示数据库只返回不同的值；DISTINCT关键字作用于所有的列</li>
+          <li>限制结果：在MySQL数据库中使用「LIMIT」关键字来限制返回行数；「LIMIT 5 OFFSET 2」指示MySQL等DBMS返回从第2行起的5行数据。第一个数字是检索的行数，第二个数字是指从哪里开始检索</li>
+          <li>第0行：第一个被检索的行是第0行，而不是第1行。因此，LIMIT 1 OFFSET 1检索的是第2行，而不是第1行。</li>
+          <li>使用注释：SQL语句是由DBMS处理的指令。添加注释使用两个连字符（——）嵌在行内或者使用/*之间都是注释*/</li>
+        </ol>
+      </div>
+      <div class="content">
+        <h3>排序检索数据</h3>
+        <ul>
+          <li>如何使用SQL的SELECT语句的ORDER BY子句对检索出的数据进行排序</li>
+          <li>ORDER BY子句必须是SELECT语句中的最后一条子句</li>
+          <li>如何对一个或多个列进行升序／降序排序</li>
+        </ul>
+        <h3>排序数据</h3>
+        <ol>
+          <li>子句「clause」：SQL语句由子句构成，有些子句是必需的，有些则是可选的。一个子句通常由一个关键字加上所提供的数据组成。</li>
+          <li>ORDER BY子句：取一个或多个子句，据此对SELECT语句检索出的数据进行排序</li>
+          <li>ORDER BY子句的位置：确保是SELECT语句中最后一条子句，不然会出现错误信息</li>
+          <li>ORDER BY子句可对非选择列进行排序</li>
+          <li>按多个列排序：简单指定列名，列名之间用逗号分开</li>
+          <li>按列位置排序：支持按SELECT清单中指定的选择列的相对位置排序，容易出错</li>
+          <li>指定排序方向：升序ASC「ASCENDING」／降序DESC「DESCENDING」</li>
+          <li>在多个列上降序排序：关键字DESC只对指定列有效，想在多个列上降序排序，必须对每一列指定DESC关键字</li>
+        </ol>
+
       </div>
     </div>
   </div>
