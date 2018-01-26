@@ -10,8 +10,26 @@
   <div class="header"></div>
   <div class="mainbody">
     <div class="container">
+      <h1>MySQL</h1>
       <div class="content">
-        <h3>在安装mysql</h3>
+        <div class="section">
+          <h3>在 Mac 上搭建MySQL数据库</h3>
+          <ol>
+            <li><a href="https://dev.mysql.com/downloads/mysql/">Download MySQL Community Server</a></li>
+            <li>下载dmg格式的文件安装，最后一步会给root用户生成一个临时密码，截图或者复制密码等下登陆用</li>
+            <li>安装完成之后，打开系统偏好设置，最下边一栏有个MySQL图标，点击之后选择Start MySQL Server运行数据库</li>
+            <li>打开终端Terminal，可以从Command+空格（Space）跳出Spotlight搜索栏中打开</li>
+            <li>输入指令，进入到bin文件夹下，cd指令为进入用户主目录，后面为文件路径，跟手动打开目录是一个意思 <code>cd /usr/local/mysql/bin</code></li>
+            <li>这条指令让我们输入主机名、用户名、密码，我们是本地登陆可以不输主机名，用root账户，密码为刚刚保存的默认密码 <code>./mysql -h host -u username -p</code></li>
+            <li>完整指令<code>./mysql -h localhost -u root -p</code></li>
+            <li>然后在执行其他操作之前，数据库会要求我们修改默认密码<code>SET PASSWORD FOR 'root'@'localhost' = PASSWORD ('new-password-here');</code></li>
+            <li>在括号里填root用户的密码root或者记得住的其他密码，然后重新执行第二步登陆数据库，输入密码</li>
+            <li>输入下面这条指令，确保root账户的密码不会过期，不推荐在实际操作的数据库中中使用<code>ALTER USER 'root'@'localhost' PASSWORD EXPIRE NEVER;</code></li>
+            <li>输入指令确认数据库能正常使用然后退出<code>use mysql</code></li>
+            <li>官网有提供对不同情况重置密码的方式<a href="https://stackoverflow.com/questions/6474775/setting-the-mysql-root-user-password-on-os-x">Reference Manual</a></li>
+            <li>或者可以参考stackoverflow上的解决方案<a href="https://stackoverflow.com/questions/6474775/setting-the-mysql-root-user-password-on-os-x">Stack Overflow</a></li>
+          </ol>
+        </div>
       </div>
     </div>
   </div>
