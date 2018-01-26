@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.container{
+    margin: 0 auto;
+}
+li{
+    display: inline-block;
+}
+a{
+    text-decoration: none;
+}
