@@ -12,22 +12,63 @@
     <div class="container">
       <h1>MySQL</h1>
       <div class="content">
+        <h3>在 Mac 上搭建MySQL数据库</h3>
         <div class="section">
-          <h3>在 Mac 上搭建MySQL数据库</h3>
           <ol>
             <li><a href="https://dev.mysql.com/downloads/mysql/">Download MySQL Community Server</a></li>
             <li>下载dmg格式的文件安装，最后一步会给root用户生成一个临时密码，截图或者复制密码等下登陆用</li>
             <li>安装完成之后，打开系统偏好设置，最下边一栏有个MySQL图标，点击之后选择Start MySQL Server运行数据库</li>
             <li>打开终端Terminal，可以从Command+空格（Space）跳出Spotlight搜索栏中打开</li>
-            <li>输入指令，进入到bin文件夹下，cd指令为进入用户主目录，后面为文件路径，跟手动打开目录是一个意思 <code>cd /usr/local/mysql/bin</code></li>
-            <li>这条指令让我们输入主机名、用户名、密码，我们是本地登陆可以不输主机名，用root账户，密码为刚刚保存的默认密码 <code>./mysql -h host -u username -p</code></li>
-            <li>完整指令<code>./mysql -h localhost -u root -p</code></li>
-            <li>然后在执行其他操作之前，数据库会要求我们修改默认密码<code>SET PASSWORD FOR 'root'@'localhost' = PASSWORD ('new-password-here');</code></li>
+            <li>输入指令，进入到bin文件夹下，cd指令为进入用户主目录，后面为文件路径，跟手动打开目录是一个意思</br> <code>cd /usr/local/mysql/bin</code></li>
+            <li>这条指令让我们输入主机名、用户名、密码，我们是本地登陆可以不输主机名，用root账户，密码为刚刚保存的默认密码 </br><code>./mysql -h host -u username -p</code></li>
+            <li>完整指令</br><code>./mysql -h localhost -u root -p</code></li>
+            <li>然后在执行其他操作之前，数据库会要求我们修改默认密码</br><code>SET PASSWORD FOR 'root'@'localhost' = PASSWORD ('new-password-here');</code></li>
             <li>在括号里填root用户的密码root或者记得住的其他密码，然后重新执行第二步登陆数据库，输入密码</li>
-            <li>输入下面这条指令，确保root账户的密码不会过期，不推荐在实际操作的数据库中中使用<code>ALTER USER 'root'@'localhost' PASSWORD EXPIRE NEVER;</code></li>
-            <li>输入指令确认数据库能正常使用然后退出<code>use mysql</code></li>
+            <li>输入下面这条指令，确保root账户的密码不会过期，不推荐在实际操作的数据库中中使用</br><code>ALTER USER 'root'@'localhost' PASSWORD EXPIRE NEVER;</code></li>
+            <li>输入指令确认数据库能正常使用然后退出</br><code>use mysql</code></li>
             <li>官网有提供对不同情况重置密码的方式<a href="https://stackoverflow.com/questions/6474775/setting-the-mysql-root-user-password-on-os-x">Reference Manual</a></li>
             <li>或者可以参考stackoverflow上的解决方案<a href="https://stackoverflow.com/questions/6474775/setting-the-mysql-root-user-password-on-os-x">Stack Overflow</a></li>
+          </ol>
+        </div>
+      </div>
+      <div class="content">
+        <h3>MySQL基础练习</h3>
+        <div class="section">
+          <h4>创建用户</h4>
+          <ol>
+            <li>root账号就跟管理员账号一样，有操作不同数据库的权限。我们为不同的Web应用建立与之对应的数据库，只需要创建管理该数据库的用户，并限定用户的权限。</br><code>CREATE USER 'your_mysql_name'@'your_client_host' IDENTIFIED BY 'your_password';</code></li>
+            <li>先用root账号登陆MySQL数据库，然后创建新用户</br><code>CREATE USER 'Unicorn'@'localhost'IDENTIFIED BY '123456';</code></li>
+            <li>例如，在本地创建一个用户名为 Unicorn，密码为123456的用户。退出root用户，用新账号登陆，查看一下当前账号跟能操作的数据库。</li>
+          </ol>
+        </div>
+        <div class="section">
+          <h4>分配权限</h4>
+          <ol>
+          <li>给用户分配不同层级的权限，比如只允许用户操纵数据表的内容或者允许用户管理该数据库</br><code>GRANT priv_type ON [object_type]priv_level TO user [WITH GRANT OPTION];</code></li>
+          <li>官方手册<a href="https://dev.mysql.com/doc/refman/5.7/en/grant.html">GRANT Syntax</a></li>
+          <li>例如，root用户下为Unicorn用户分配所有权限</br><code>GRANT ALL PRIVILEGES ON db1.* TO 'Unicorn'@'localhost';</code></li>
+          <li>退出root账户<code>exit</code>，登陆Unicorn账户查看可操作的数据库 <code>show databases;</code></li>
+          </ol>
+        </div>
+        <div class="section">
+          <h4>删除用户</h4>
+          <ol>
+            <li>删除用户</br><code>drop user username@your_host;</code></li>
+            <li>从数据库中删除用户，删除后在数据库中查看用户列表</br><code>drop user Sonya@localhost;</br>select user from mysql.user;</code></li>
+          </ol>
+        </div>
+        <div class="section">
+          <h4>数据定义语言DDL</h4>
+          <ol>
+            <li>使用数据库</br><code>use database_name;</code></li>
+            <li>删除数据库</br><code>drop database database_name;</code></li>
+            <li>创建表格<a href="https://dev.mysql.com/doc/refman/5.7/en/create-table.html">CREATE TABLE Syntax</a></br><code>create table tabel_name(col_name, data_type[default_value]);</code></li>
+            <li>查看表格</br><code>describe table_name;</code></li>
+            <li>添加数据栏,添加id数据栏并指定为主键（PRIMARY KEY）</br><code>ALTER TABLE person ADD id INT(10) FIRST;</br>ALTER TABLE person ADD PRIMARY KEY(id);</code></li>
+            <li>修改数据栏名称</br><code>ALTER TABLE table_name CHANGE col_name new_col_name data_type[default_value];</code></li>
+            <li>修改数据表名称</br><code>ALTER TABLE table_name RENAME TO new_table_name;</code></li>
+            <il>删除数据栏</br><code>ALTER TABLE table_name DROP col_name;</code></il>
+            <il>删除数据表</br><code>DROP TABLE table_name;</code></il>
           </ol>
         </div>
       </div>
