@@ -326,6 +326,46 @@
           </ol>
         </div>
       </div>
+      <div class="content">
+        <div class="section">
+          <h3>汇总数据</h3>
+          <ul>
+            <li>什么是SQL的聚集函数</li>
+            <li>如何使用它们汇总表的数据</li>
+          </ul>
+        </div>
+        <div class="section">
+          <h4>聚集函数</h4>
+          <ol>
+            <li>SQL查询可用于检索数据，利用聚集函数汇总数据，以便分析和报表生成</li>
+            <li>需要汇总数据，而不需要实际数据本身的例子：找出表列（或所有行或某些特定的行）的最大值、最小值、平均值</li>
+            <li>聚集函数（aggregate function）：对某些行运行的函数，计算并返回一个值</li>
+          </ol>
+        </div>
+        <div class="section">
+          <h4>SQL聚集函数</h4>
+          <ol>
+            <li>返回某列的平均值（AVG( )）</li>
+            <li>返回某列的行数（COUNT( )）</li>
+            <li>返回某列的最大值（MAX( )）</li>
+            <li>返回某列的最小值（MIN( )）</li>
+            <li>返回某列值之和（SUM( )）</li>
+            <li>AVG( )函数：通过对表中行数计数并计算其列值之和，求得该列的平均值。AVG( )函数可用来返回所有列的平均值，也可以用来返回特定列或行的平均值</br>
+            <code>SELECT AVG(prod_price) AS avg_price;</code></li>
+            <li>只能用于单个列：AVG( )只能用来确定特定数值列的平均值，而且列名必须作为函数参数给出</li>
+            <li>NULL值：AVG( )函数忽略值为NULL的行</li>
+            <li>COUNT( )函数：确定表中行的数目或符合特定条件的行的数目</li>
+            <li>使用方式：使用COUNT(*)对表中行的数目进行计数，不管表列中包含的是空值还是非空值；使用COUNT(column)对特定列中具有值的行进行计数，忽略NULL值</li>
+            <li>只对具有电子邮件地址的客户计数</br><code>SELECT COUNT(cust_email) AS num_cust;</code></li>
+            <li>MAX( )函数返回指定列中的最大值，要求指定列名，忽略NULL值</li>
+            <li>MIN( )函数返回指定列的最小值，要求指定列名，忽略NULL值</li>
+            <li>SUM( )函数用来返回指定列值的和，也可以用来合计计算值</br><code>SELECT SUM(item_price*quantity) AS total_price;</code></li>
+            <li>聚集不同值：对所有行执行计算，指定ALL参数或不指定参数（ALL是默认行为）；只包含不同的值，指定DISTINCT参数</br><code>SELECT AVG(DISTINCT prod_price) AS avg_price;</code></li>
+            <li>组合聚集函数：SELECT语句可根据需要包含多个聚集函数</li>
+            <li>取别名：在指定别名包含某个聚集函数的结果时，不应该使用表中的实际列名</li>
+          </ol>
+        </div>
+      </div>
     </div>
   </div>
   <div class="footer"></div>
