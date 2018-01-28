@@ -71,6 +71,23 @@
             <il>删除数据表</br><code>DROP TABLE table_name;</code></il>
           </ol>
         </div>
+        <div class="section">
+          <h4>实例练习</h4>
+          <ol>
+            <li>创建表格：先创建一个数据库movietalk，设置数据库字符集utf8(charset=utf8)；</br>创建一个名为people的表格，指定people_id为primary key，unsigned（字段值为正数）、not null（不为空）、auto _increment（排序自动增加）</li>
+            <li>插入数据：<a href="https://dev.mysql.com/doc/refman/5.7/en/insert.html">INSERT Syntax</a></br><code>INSERT INTO tbl_name (col_name) VALUES(col_value);</code></br>插入的数据名跟值要一一对应，文本类型的数据需添加引号</br><code>insert into people (people_name,people_birth) value ('John', '1965-02-24');</code></li>
+            <li>选择数据：<a href="https://dev.mysql.com/doc/refman/5.7/en/select.html">SELECT Syntax</a></br><code>SELECT col_name FROM tbl_name WHERE condition;</code></br>例子：</br><code>select people_name from people where people_birth='1965-02-24';</code></li>
+            <li>我们可以用`ORDER BY`设置查询结果的排序方式，默认是ASC升序，这里设置成 DESC降序</br><code>SELECT * FROM people ORDER BY people_birth DESC;</code></li>
+            <li>更新数据 <a href="https://dev.mysql.com/doc/refman/5.7/en/update.html">UPDATE Syntax</a>更新 表格 设置 col值 where条件</br><code>UPDATE people SET people_birth='1965-01-24', people_name='Mark' WHERE people_id = 1;</code></li>
+            <li>删除数据：<code>DELETE FROM tbl_name  [WHERE where_condition] [ORDER BY ...]</code></br>例子：</br><code>delete from people where people_id=1;</code></li>
+            <li>LIMIT 与 OFFSET：LIMIT 限制查询结果数量，比如只显示3条查询结果</br><code>SELECT * FROM people WHERE people_location = 'York' LIMIT 3;</code></br>OFFSET设置偏移量，比如LIMIT设置成3，OFFSET设置成1，往后偏移1个数，找到的结果从第2行开始显示，id为2，3，4</li>
+            <li>操作符：比较：大于，小于，大于等于，小于等于，不等于<a href="https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html">Comparison Functions and Operators</a></br><code>SELECT * FROM people WHERE people_birth > '1960-01-01';</code></li>
+            <li>IN( ) > Check whether a value is within a set of values </br><code>SELECT * FROM people WHERE people_location IN ('NEW YORK');</code></li>
+            <li>LIKE > Simple pattern matching 简单模式匹配</li>
+            <li>通配符：通配符%表示一个或多个字符， _表示一个字符</br><code>SELECT * FROM people WHERE people_name LIKE ('J%');</code></br>'J_'表示找出以J开头两个字符的名字</li>
+            <li>逻辑<a href="https://dev.mysql.com/doc/refman/5.7/en/logical-operators.html">Logical Operators</a>与AND或OR非NOT</br>查询出生日期在1960年1月1号与1970年1月1号之间的人<code>SELECT * FROM people WHERE people_birth > '1960-01-01' AND people_birth < '1970-01-01';</code></li>
+          </ol>
+        </div>
       </div>
     </div>
   </div>
