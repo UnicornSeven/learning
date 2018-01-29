@@ -527,6 +527,64 @@
           </ol>
         </div>
       </div>
+      <div class="content">
+        <div class="section">
+          <h3>创建高级联结</h3>
+          <ul>
+            <li>如何以及为什么使用别名</li>
+            <li>不同的联结类型以及每类联结所使用的语法</li>
+            <li>如何与联结一起使用聚集函数</li>
+            <li>使用联结时应该注意的问题</li>
+          </ul>
+        </div>
+        <div class="section">
+          <h4>使用表别名</h4>
+          <ol>
+            <li>SQL除了可以对列名和计算字段使用别名，还允许给表名起别名：可以缩短SQL语句；允许在一条SELECT语句中多次使用相同的表</br>
+              <code>SELECT cust_name, cust_contact FROM Customers AS C, Orders AS O, OrderItems AS OI WHERE C.cust_id = O.cust_id AND O.oder_num = OI.order_num AND prod_id = 'RGAN01';</code>
+            </li>
+            <li>表别名只在查询执行中使用，与列表名不一样，表别名不返回到客户端</li>
+          </ol>
+        </div>
+        <div class="section">
+          <h4>使用不同类型的联结</h4>
+          <ol>
+            <li>自联结（self-join）：使用表别名的一个重要的原因是能在一条SELECT语句中不止一次引用相同的表；自联结通常作为外部语句，用来替代从相同表中检索数据的子查询语句</li>
+            <li>要给与Jim Jones同一公司的所有顾客发送一封信件：找出Jim Jones工作的公司，然后找出该公司工作的顾客。</br>
+              <code>SELECT c1.cust_id, c1.cust_name, c1.cust_contact FROM Customers AS c1, Customers AS c2 WHERE c1.cust_name = c2.cust_name AND  c2.cust_contact = 'Jim Jones';</code>
+            </li>
+            <li>SELECT语句使用明确给出所需列的全名，指示DBMS哪一列（其实它们是同一列）；WHERE子句联结两个表，然后按第二个表中cust_contact的过滤数据，返回所需的数据</li>
+            <li>自然联结（natural join）：标准的联结返回所有数据，相同的列甚至多次出现；自然联结排除多次出现，使每一列只返回一次</li>
+            <li>自然联结要求你只能选择那些唯一的列，一般通过对一个表使用通配符（SELECT *），而对其他表的列使用明确的子集来完成</li>
+            <li>很少有不是自然联结的内联结，基本上每个内联结都是自然联结</li>
+            <li>外联结（outer join）：许多联结将一个表中的行与另一个表中的行相关联，但有时候需要包含没有关联行的那些行，这种联结称为外联结</li>
+            <li>使用内联结，检索所有顾客及其订单；使用外联结，检索包括没有顾客在内的所有顾客</li>
+            <li>选择FROM子句左边的表（Customers表）中选择所有行</li>
+            <li>在使用OUTER JOIN语法时，必须使用RIGHT或LEFT关键字指定包括其所有行的表（RIGHT指出的是 OUTER JOIN右边的表，而 LEFT 指出的是OUTER JOIN左边的表）</li>
+            <li>外联结的类型：左外联结和右外联结之间唯一的差别是所关联的表的顺序。调整FROM或WHERE子句中表的顺序，左外联结可以转换成右外联结</li>
+            <li>全外联结（full outer join）：检索两个表中的所有行并关联那些可以关联的行，全外联结包含两个表的不关联的行</li>
+          </ol>
+        </div>
+        <div class="section">
+          <h4>使用带聚集函数的联结</h4>
+          <ol>
+            <li>例子：要检索所有顾客及每个顾客所下的订单数</br>
+              <code>SELECT Customers.cust_id, COUNT(Orders.order_num) AS num_orders FROM   Customers INNER JOIN Orders ON  Customers.cust_id = Orders.cust_id GROUP BY Customers.cust_id;</code>
+            </li>
+            <li>这条SELECT语句使用INNER JOIN将Customers和Orders表互相关联；GROUP BY子句按顾客分组数据，因此函数调用COUNT(Orders.order_num)对每个顾客的订单计数，将它作为num_ord返回</li>
+          </ol>
+        </div>
+        <div class="section">
+          <h4>使用联结和外联结条件</h4>
+          <ol>
+            <li>注意所使用的联结类型</li>
+            <li>关于确切的联结语法，应该查看具体文档，看相应的DBMS支持何种语法</li>
+            <li>保证使用正确的联结条件，否则会返回不正确的数据</li>
+            <li>总是提供联结条件，否则会得出笛卡尔积</li>
+            <li>在一个联结中可以包含多个表，甚至可以对每个联结采用不同的联结类型</li>
+          </ol>
+        </div>
+      </div>
     </div>
   </div>
   <div class="footer"></div>
