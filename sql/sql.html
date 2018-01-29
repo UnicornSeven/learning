@@ -486,6 +486,47 @@
           </ol>
         </div>
       </div>
+      <div class="content">
+        <div class="section">
+          <h3>联结表</h3>
+          <ul>
+            <li>什么是联结</li>
+            <li>为什么使用联结</li>
+            <li>如何编写使用联结的SELECT语句</li>
+          </ul>
+        </div>
+        <div class="section">
+          <ol>
+            <li>联结</br>SQL最强大的功能之一就是能在数据查询的执行中联结（join）表，联结是利用SQL的SELECT能执行的最重要的操作</li>
+            <li>关系表</br>关系表的设计就是要把信息分解成多个表，一类数据一个表，各表通过某些共同的值互相关联（所以才叫关系数据库</li>
+            <li>可伸缩（scale）：能够适应不断增加的工作量而不失败，设计良好的数据库或应用程序称为可伸缩性好</li>
+            <li>为什么使用联结</br>将数据分解为多个表能更有效地存储，更方便地处理，并且可伸缩性更好</br>
+                将数据存储在多个表中，通过联结检索出数据。简单说，联结是一种机制，用来在一条SELECT语句中关联表，因此称为联结</br>
+                使用特殊的语法，可以联结多个表返回一组输出，联结在运行时关联表中正确的行</br>
+            </li>
+            <li>创建联结</br>创建联结：指定要联结的所有表以及要关联它们的方式</br>
+                <code>SELECT vend_name, prod_name, prod_price
+                      FROM Vendors, Products
+                      WHERE Vendors.vend_id = Products.vend_id;</code></li>
+            <li>SELECT语句指定要关联的表的名字，WHERE子句指示DBMS将Vendors表中的vend_id与Products表中的vend_id匹配起来</li>
+            <li>WHERE子句的重要性：</br>
+                在一条SELECT语句中联结几个表时，相应的关系是在运行中构造的，在数据库表的定义中没有指示DBMS如何对表进行联结。
+            </li>
+            <li>在联结两个表时，实际要做的是将第一个表中的每一行与第二个表中的每一行配对；WHERE子句作为过滤条件，只包含那些匹配给定条件（联结条件）的行</li>
+            <li>笛卡尔积（cartesian product）：由没有联结条件的表关系返回的结果为笛卡尔积，也称为叉联结（cross join）。检索出的行的数目将是第一个表中的行数乘以第二个表中的行数</li>
+            <li>要保证所有联结都有WHERE子句，同时保证WHERE子句的正确性</li>
+            <li>内联结</br>
+                等值联结／内联结（inner join）：基于两个表之间的相等测试，可以对这种联结使用不同的语法，明确指定联结的类型</br>
+              <code>SELECT vend_name, prod_name, prod_price FROM Vendors INNER JOIN Products ON Vendors.vend_id = Products.vend_id;</code>
+            </li>
+            <li>联结条件用特定的ON子句而不是WHERE子句给出，传递给ON的实际条件与传递给WHERE的相同</li>
+            <li>联结多个表</br>SQL不限制一条SELECT语句中可以联结的表的数目，创建联结的基本规则也相同。首先列出所有表，然后定义表之间的关系</li>
+            <li>显示订单20007中的物品 :</br><code>SELECT prod_name, vend_name, prod_price, quantity FROM Vendors, OrderItems, Products WHERE Vendors.vend_id = Products.vend_id AND OrderItems.prod_id = Products.prod_id AND order_num = 20007;</code></li>
+            <li>DBMS在运行时关联指定的每个表，以处理联结，这种处理非常耗费资源。联结的表越多，性能下降越厉害</li>
+            <li>执行任一给定的SQL操作一般不止一种方法，很少有绝对正确或绝对错误的方法。性能可能会受操作类型、所使用的DBMS、表中的数据量、是否存在索引或键等条件的影响</li>
+          </ol>
+        </div>
+      </div>
     </div>
   </div>
   <div class="footer"></div>
