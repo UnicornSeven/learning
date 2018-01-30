@@ -1121,6 +1121,67 @@
           </ol>
         </div>
       </div>
+      <div class="content">
+        <div class="section">
+          <h4>使用游标</h4>
+          <ul>
+            <li>什么是游标</li>
+            <li>如何使用游标</li>
+            <li>使用的DBMS可能会提供某种形式的游标</li>
+          </ul>
+        </div>
+        <div class="section">
+          <ol>
+            <li>游标：SQL检索操作返回一组称为结果集的行，这组返回的行都是与SQL语句相匹配的行（零行或多行</li>
+            <li>结果集（result set）：SQL查询所检索出的结果</li>
+            <li>游标（cursor）：是一个存储在DBMS服务器上的数据库查询，它不是一条SELECT语句，而是被该语句检索出来的结果集。在存储游标之后，应用程序可以根据需要滚动或浏览其中的数据</li>
+            <li>游标的作用：在检索出来的行中前进或后退一行或多行</li>
+            <li>游标常见的一些选项和特性：</br>
+              - 能够标记游标为只读，使数据能读取，但不能更新和删除</br>
+              - 能控制可以执行的定向操作（向前、向后、第一、最后、绝对位置、相对位置等）</br>
+              - 能标记某些列为可编辑的，某些列为不可编辑的</br>
+              - 规定范围，使游标对创建它的特定请求或对所有请求可访问</br>
+              - 指示DBMS对检索出的数据进行复制，使数据在游标打开和访问期间不变化</br>
+            </li>
+            <li>游标主要用于交互式应用，其用户需要滚动屏幕上的数据，并对数据进行进行浏览或做出更改。因为游标对基于Web的应用（ASP/ASP.NET/ColdFusion/PHP/Python/Ruby/JSP等）用处不大，因为应用服务器是数据库客户而不是最终用户</li>
+            <li>使用游标:</br>
+              - 在使用游标前，必须声明（定义）它。这个过程实际上没有检索数据，它只是定义要使用的SELECT语句和游标选项</br>
+              - 一旦声明，就必须打开游标以供使用。这个过程用前面定义的SELECT语句把实际数据检索出来</br>
+              - 对填有数据的游标，根据需要检索各行</br>
+              - 在结束游标使用时，必须关闭游标，可能的话，释放游标</br>
+            </li>
+            <li>创建游标：</br>
+                使用DECLARE语句创建游标，DECLARE命名游标，并定义相应的SELECT语句，根据需要带WHERE子句和其他子句</br>
+                例子，创建一个游标来检索没有电子邮件地址的所有顾客，作为应用程序的组成部分，帮助操作人员找出空缺的电子邮件地址</br>
+              <code>DECLARE CustCursor CURSOR FOR
+                    SELECT * FROM Customers
+                    WHERE cust_email IS NULL;</code>
+            </li>
+          </ol>
+        </div>
+        <div class="section">
+          <h4>使用游标：</h4>
+          <ol>
+            <li>使用OPEN CURSOR语句打开游标</br>
+              <code>OPEN CURSOR CustCursor</code>
+            </li>
+            <li>分析：在处理OPEN CURSOR语句时，执行查询，存储检索出的数据以供浏览和滚动</li>
+            <li>FETCH语句：使用FETCH语句访问游标数据，指出要检索哪些行，从何处检索它们以及将它们放于何处</br>
+              <code>DECLARE TYPE CustCursor IS REF CURSOR
+                  RETURN Customers%ROWTYPE;
+                  DECLARE CustRecord Customers%ROWTYPE
+                  BEGIN
+                  OPEN CustCursor;
+                  FETCH CustCursor INTO CustRecord;
+                  CLOSE CustCursor;
+                  END;</code></br>
+                FETCH用来检索当前行，放到声明的变量CustRecord中。对于检索出来的数据不做任何处理</br>
+                关闭游标：游标在使用完毕时需要关闭 CLOSE CustCursor
+            </li>
+          </ol>
+        </div>
+      </div>
+      
     </div>
   </div>
   <div class="footer"></div>
