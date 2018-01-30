@@ -892,7 +892,96 @@
           </ol>
         </div>
       </div>
-      
+      <div class="content">
+        <div class="section">
+          <h3>使用视图</h3>
+          <ul>
+            <li>什么是视图</li>
+            <li>视图是怎么工作的</li>
+            <li>何时使用视图</li>
+            <li>如何利用视图简化某些SQL操作</li>
+          </ul>
+        </div>
+        <div class="section">
+          <ol>
+            <li>视图：视图是虚拟的表，与包含数据的表不一样，视图只包含使用时动态检索数据的查询</li>
+            <li>例子：检索订购某种产品的顾客的查询，需要理解表的结构，知道如何创建查询和对表进行联结</br>
+              <code>SELECT cust_name, cust_contact
+                    FROM Customers, Orders, OrderItems
+                    WHERE Customers.cust_id = Order.cust_id
+                    AND OrderItems.order_num = Orders.order_num
+                    AND prod_id = 'RGAN01';</code>
+            </li>
+            <li>视图则是把整个查询包装成一个名为ProductCustomers的虚拟表</br>
+              <code>SELECT cust_name, cust_contact
+                    FROM ProductCustomers
+                    WHERE prod_id = 'RGAN01';</code>
+            </li>
+            <li>视图的作用：轻松地检索出相同的数据。ProductCustomers是一个视图，它不包含任何列或数据，包含的是一个查询</li>
+            <li>视图的常见应用：</br>
+              - 重用SQL语句</br>
+              - 简化复杂的SQL操作，在编写查询后，可以方便地重用它而不必知道其基本查询细节</br>
+              - 使用表的一部分而不是整个表</br>
+              - 保护数据，可以授予用户访问表的特定部分权限，而不是整个表的访问权限</br>
+              - 更改数据格式的表示。视图可返回与底层表的表示和格式不同的数据</br>
+              - 可以对视图执行SELECT操作，过滤和排序数据，将视图联结到其他视图或表，甚至添加和更新数据</br>
+            </li>
+            <li>视图本身不包含数据，因此返回的数据是从其他表中检索出来的。在添加或更改这些表中的数据时，视图将返回改变过的数据</li>
+            <li>创建视图时的限制，需要查看具体的DBMS文档</li>
+            <li>常见的规则和限制：</br>
+              - 与表一样，视图必须唯一命名</br>
+              - 对于可以创建的视图数目没有限制</br>
+              - 创建视图，必须具有足够的访问权限</br>
+              - 视图可以嵌套，即可以利用从其他视图中检索数据的查询来构造视图</br>
+              - 许多DBMS禁止在视图查询中使用ORDER BY子句</br>
+              - 有些DBMS要求返回所有例进行命名，如果列是计算字段，则需要使用别名</br>
+              - 视图不能索引，也不能有关联的触发器或默认值</br>
+              - 有些DBMS把视图作为只读的查询，这表示可以从视图检索数据，但不能将数据写会底层表</br>
+              - 有些DBMS允许创建这样的视图，它不能进行导致行不再属于视图的插入或更新。例如有一个视图，只检索带有电子邮件地址的顾客。如果更新某个顾客，删除他的电子邮件地址，将使该顾客不再属于视图。这是默认行为，而且是允许的，但有的DBMS可能会防止这种情况发生</br>
+            </li>
+            <li>CREATE VIEW语句：只能用于创建不存在的视图。覆盖（或）更新视图，必须先删除它，然后再重新创建。删除视图，可以使用DROP语句，语法为DROP VIEW viewname</br>
+              <code>
+                CREATE VIEW ProductCustomers AS
+                SELECT cust_name, cust_contact
+                FROM Customers, Orders, OrderItems
+                WHERE Customers.cust_id = Order.cust_id
+                 AND OrderItems.order_num = Orders.order_num;
+              </code></br>
+              <code>SELECT cust_name, cust_contact
+                    FROM ProductCustomers
+                    WHERE prod_id = 'RGAN01';</code>
+            </li>
+            <li>利用视图简化复杂的联结：创建一个名为ProductCustomers的视图，它联结三个表，返回已订购了任意产品的所有顾客的列表。如果执行SELECT *FROM ProductCustomers ，将列出订购了任意产品的顾客</li>
+            <li>这条语句通过WHERE子句从视图中检索特定数据。当DBMS处理此查询时，它将指定的WHERE子句添加到视图查询中已有的WHERE子句中，以便正确过滤数据</li>
+            <li>视图极大地简化了复杂SQL语句的使用。利用视图，可一次性编写基础的SQL，然后根据需要多次使用</li>
+            <li>用视图重新格式化检索出的数据：假设经常需要某种格式的结果，我们不必在每次需要时执行这种拼接，而是创建一个视图，使用视图即可</li>
+            <li>要检索数据，创建所有的邮件标签：</br>
+              <code>CREATE VIEW VendorLocation AS
+                    SELECT RTRIM(vend_name) + '(' + RTRIM(vend_country) + ')'
+                    FROM Vendors;</code></br>
+              <code>SELECT * FROM VendorLocations;</code>
+            </li>
+            <li>SELECT约束全部适用</li>
+            <li>用视图过滤不想要的数据：可以定义CustomerEmailList视图，过滤没有电子邮件地址的顾客</br>
+              <code>CREATE VIEW CustomerEmailList AS
+                    SELECT cust_id, cust_name, cust_email
+                    FROM Customers
+                    WHERE cust_email IS NOT NULL;</code></br>
+              <code>SELECT * FROM CustomerEmailList;</code>
+            </li>
+            <li>使用视图和计算字段：先转换为视图，然后再检索订单的详细内容</br>
+              <code>CREATE VIEW OrderItemExpanded AS
+                      SELECT order_num,
+                             prod_id,
+                             quantity,
+                             item_price,
+                             quantity*item_price AS expanded_price
+                      FROM OrderItems;</code></br>
+                <code>SELECT * FROM OrderItemExpanded WHERE order_num = 20008;</code>
+            </li>
+          </ol>
+        </div>
+      </div>
     </div>
   </div>
   <div class="footer"></div>
