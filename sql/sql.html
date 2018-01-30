@@ -1042,7 +1042,85 @@
           </ol>
         </div>
       </div>
-  
+      <div class="content">
+        <div class="section">
+          <h3>管理事务处理</h3>
+          <ul>
+            <li>什么是事务处理</li>
+            <li>如何利用COMMIT和ROLLBACK语句管理事务处理</li>
+            <li>如何使用保留点，更好地控制回退操作</li>
+          </ul>
+        </div>
+        <div class="section">
+          <h4>事务处理</h4>
+          <ol>
+            <li>事务处理（transaction processing）:使用事物处理，通过确保成批的SQL操作要么完全执行，要么完全不执行，来维护数据库的完整性</li>
+            <li>关系数据库把数据存储在多个表中，使数据更容易操纵、维护和重用</li>
+            <li>给系统添加订单的过程：</br>
+              - 检查数据库中是否存在相应的顾客，如果不存在则添加；</br>
+              - 检索顾客的ID；</br>
+              - 在 Orders表添加一行，与顾客ID相关联；</br>
+              - 检索Orders表中赋予的新订单ID；</br>
+              - 为订购的每个物品在OrderItems表中添加一行，通过检索出来的ID把它与Orders表关联（并且通过产品ID与Products表关联）。</br>
+            </li>
+            <li>若是数据库故障，这个过程无法完成，就需要使用事物处理</br>
+                事物处理：是一种机制，用来管理必须成批执行的SQL操作，保证数据库不包含不完整的操作结果</br>
+                利用事物处理，可以保证一组操作不会中途停止，它们要么完全执行，要么完全不执行</br>
+            </li>
+            <li>说明这一过程是如何工作的：</br>
+              - 检查数据库中是否存在相应的顾客，如果不存在，则添加他；</br>
+              - 提交顾客信息</br>
+              - 检索顾客的ID</br>
+              - 在Orders表中添加一行</br>
+              - 如果向Orders表添加行时出现故障，回退</br>
+              - 检索Orders表中赋予的新订单ID</br>
+              - 对于订购的每项物品，添加新行到OrderItem表</br>
+              - 如果向OrderItems添加行时出现故障，回退所有添加的OrderItems行和Orders行</br>
+            </li>
+            <li>事物处理的术语：</br>
+              - 事务（transaction）指一组SQL语句</br>
+              - 回退（rollback）指撤销指定SQL语句的过程</br>
+              - 提交（commit）指将未存储的 SQL语句结果写入数据库表</br>
+              - 保留点（savepoint）指事物处理中设置的临时占位符（placeholder）可以对它发布回退（与回退整个事务处理不同）</br>
+            </li>
+          </ol>
+        </div>
+        <div class="section">
+          <h4>控制事务处理</h4>
+          <ol>
+            <li>不同DBMS用来实现事务处理的语法不同，在使用事务处理时请参阅相应的DBMS文档</li>
+            <li>管理事务的关键在于将SQL语句分解为逻辑块，并明确规定数据何时应该回退，何时不应该回退</br>
+              <code>BEGIN TRANSACTION
+                    COMMIT TRANSACTION</code></br>
+                在这个例子中两个语句之间的SQL必须完全执行或完全不执行
+            </li>
+            <li>使用ROLLBACK撤销SQL语句：</br><code>DELETE FROM Orders; ROLLBACK;</code></br>
+                在此例子中，执行DELETE操作，然后用ROLLBACK语句撤销。这个例子说明在事务处理块中，DELETE操作与UPDATE操作和INSERT操作一样，并不是最终结果
+            </li>
+            <li>使用 COMMIT操作：一般的SQL语句都是针对数据库表直接执行和编写的，这就是所谓的隐式提交（implicit commit），即提交（写或保存）操作是自动进行的</li>
+            <li>在事务处理块中，提交不会隐式进行</li>
+            <li>在这个SQL Server中，从系统完全删除订单12345。因为涉及更新两个数据库表Orders和OrderItems，所以使用事务处理块来保证订单不被部分删除。最后的COMMIT语句仅在不出错时更改。如果第一条DELETE起作用，但第二条失败，则DELETE不会提交</br>
+              <code>BEGIN TRANSACTION
+                    DELETE OrderItems WHERE order_num = 12345
+                    DELETE Orders WHERE order_num = 12345
+                    COMMIT TRANSACTION</code>
+            </li>
+            <li>使用保留点：使用简单的ROLLBACK和COMMIT语句，就可以写入或撤销整个事务。但是，只对简单的事务才能这么做，复杂的事务需要部分提交或回退</li>
+            <li>要支持回退部分事务，必须在事务处理块中的合适位置放置占位符。这样，如果需要回退，可以回退到某个占位符。在SQL中，这些占位符称为保留点</li>
+            <li>在SQL Server中可以如下进行</br><code>SAVE TRANSACTION delete1;</code></li>
+            <li>下图是一个完整的SQL Server的例子，在SQL 代码中设置任意多的保留点，越多越好，可以任意回退。</br>
+              <code>BEGIN TRANSACTION
+                    INSERT INTO Customers(cust_id, cust_name) VALUES ('10000000010','Toy Emporium');
+                    SAVE TRANSACTION StartOrder;
+                    INSERT INTO Orders(order_num, order_date, cust_id) VALUES (20100, '2001/12/1','10000000010');
+                    IF @@ERROR != 0 ROLLBACK TRANSACTION StartOrder;
+                    INSERT INTO OrderItems(order_num, order_item, prod_id, quantity, item_price) VALUES (20100, 2, 'BR03', 100, 10.99);
+                    IF @@ERROR != 0 ROLLBACK TRANSACTION StartOrder;
+                    COMMIT TRANSACTION;</code>
+            </li>
+          </ol>
+        </div>
+      </div>
     </div>
   </div>
   <div class="footer"></div>
