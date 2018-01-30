@@ -585,6 +585,62 @@
           </ol>
         </div>
       </div>
+      <div class="content">
+        <div class="section">
+          <h3>组合查询</h3>
+          <ul>
+            <li>如何利用UNION操作符将多条SELECT语句结合组合成一个结果集</li>
+          </ul>
+        </div>
+        <div class="section">
+          <h3>组合查询</h3>
+          <ol>
+            <li>组合查询（union）或复合查询（compound query）：多数SQL语句只包含一个或多个从表中返回数据的单条SELECT语句；SQL也允许执行多个查询，并将结果作为一个查询结果集返回</li>
+            <li>什么时候使用组合查询：</br>在一个查询中从不同的表返回数据结构；</br>对一个表执行多个查询，按一个查询返回数据</li>
+            <li>组合条件和多个WHERE查询：任何具有多个WHERE子句的SELECT语句都可以作为一个组合查询</br><code>SELECT cust_name, cust_contact, cust_email FROM   Customers WHERE  cust_state IN ('IL','IN','MI') OR  cust_name = 'Fun4A11';</code></li>
+            <li>创建组合查询例子</br>
+              <code>SELECT cust_name,cust_contact,cust_email
+                    FROM  Customers
+                    WHERE cust_state IN ('IL','IN','MI');</br>
+                    UNION</br>
+                    SELECT cust_name, cust_contact, cust_email
+                    FROM   Customers
+                    WHERE  cust_name = 'Fun4A11';</code></li>
+            <li>使用UNION ：</br>
+                使用UNION很简单，给出每条SELECT语句，在各条语句之间放上关键词UNION</br>
+                UNION指示DBMS执行这两条SELECT语句，并把输出组合成一个查询结果集。</br>
+                使用UNION组合SELECT语句的数目，SQL没有标准限值，最好参考一下具体的DBMS文档
+            </li>
+            <li>UNION规则</br>
+                UNION必须由两条或两条以上的SELECT语句组成，语句之间用关键字UNION分隔</br>
+                UNION中的每个查询必须包含相同的列、表达式或聚集函数（各个列不需要以相同的次序列出）</br>
+                列数据类型必须兼容：类型不必完全相同，但必须是DBMS可以隐含转换的类型</br>
+            </li>
+            <li>包含或取消重复的行</br>
+                UNION从查询结果集中自动去除重复的行</br>
+                UNION ALL：使用UNION ALL返回所有的匹配行，DBMS不取消重复的行</br>
+              <code>SELECT cust_name,cust_contact,cust_email
+                    FROM  Customers
+                    WHERE cust_state IN ('IL','IN','MI');</br>
+                    UNION ALL</br>
+                    SELECT cust_name, cust_contact, cust_email
+                    FROM   Customers
+                    WHERE  cust_name = 'Fun4A11';</code>
+            </li>
+            <li>对组合查询结果排序</br>
+                使用UNION组合查询时，只能使用一条ORDER BY子句，它必须位于最后一条SELECT语句之后；对于结果集，不存在用一种方式排序一部分，而用另一种方式排序另一种部分的情况</br>
+                <code>SELECT cust_name,cust_contact,cust_email
+                      FROM  Customers
+                      WHERE cust_state IN ('IL','IN','MI');</br>
+                      UNION</br>
+                      SELECT cust_name, cust_contact, cust_email
+                      FROM   Customers
+                      WHERE  cust_name = 'Fun4A11'
+                      ORDER BY cust_name, cust_contact;</code>
+            </li>
+          </ol>
+        </div>
+      </div>
     </div>
   </div>
   <div class="footer"></div>
