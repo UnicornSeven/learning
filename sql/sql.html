@@ -800,6 +800,98 @@
           </ol>
         </div>
       </div>
+      <div class="content">
+        <div class="section">
+          <h4>创建和操纵表</h4>
+          <ul>
+            <li>创建、删除和更改表的基本知识</li>
+            <li>CREATE TABLE用来创建新表</li>
+            <li>ALTER TABLE用来更改表列（或其他诸如约束或索引等对象）</li>
+            <li>DROP TABLE用来完整删除一个表</li>
+          </ul>
+        </div>
+        <div class="section">
+          <ol>
+            <li>创建表</br>
+                SQL不仅用于表数据操纵，还用来执行数据库和表的所有数据，包括表本身的创建和处理
+            </li>
+            <li>创建表的方法：</br>多数DBMS都具有交互式创建和管理数据库表的工具；表也可以直接用SQL语句操纵</br>使用界面工具会自动生成并执行相应的SQL语句</br></li>
+            <li>表创建基础</br>
+                CREATE TABLE语句：</br>新表的名字，在CREATE TABLE关键字之后给出；表列的名字和定义，用逗号分隔；有的DBMS还要求指定表的位置</br>
+                <code>CREATE TABLE Products
+                      ( prod_id CHAR(10) NOT NULL,
+                        vend_id CHAR(10) NOT NULL,
+                        prod_name CHAR(254) NOT NULL,
+                        prod_price DECIMAL(8,2) NOT NULL,
+                        prod_desc VARCHAR(1000) NULL);</code>
+            </li>
+            <li>表名紧跟CREATE TABLE关键字，实际的表定义（所有列）括在圆括号之中，各列之间用逗号分隔；每列的定义以列名（它在表中必须是唯一的）开始，后跟列的数据类型；整条语句以圆括号后的分号结束</li>
+            <li>语句格式化：</br>SQL语句格式化，代码安排在多个行上，列定义进行恰当的缩进，更易阅读和编辑</br>替换现有的表：在创建新的表时，指定的表名必须不存在，否则会出错</li>
+            <li>使用NULL值</br>允许NULL值的列也允许在插入行时不给出该列的值；不允许NULL值的列不接受没有列值的行，在插入或更新行时，该列必须有值</br>
+                每个表列要么是NULL值，要么是NOT NULL列，这种状态在创建时由表的定义规定</br>
+              <code>CREATE TABLE Vendors
+                    (order_num INTEGER NOT NULL,
+                     order_date DATETIME NOT NULL,
+                     cust_id CHAR(10) NOT NULL);</code>
+            </li>
+            <li>如果插入没有值的列，将返回错误，且插入失败</li>
+            <li>NULL为默认设置，如果不指定NOT NULL，就认为指定的是NULL</br>
+              <code>CREATE TABLE Vendors
+                    (vend_id       CHAR(10) NOT NULL,
+                     vend_name     CHAR(50) NOT NULL,
+                     vend_address  CHAR(50) ,
+                     vend_city     CHAR(50) ,
+                     vend_state    CHAR(5)  ,
+                     vend_zip      CHAR(10) ,
+                     vend_country  CHAR(50) ,);</code>
+            </li>
+            <li>主键和NULL值： 允许NULL值的列不能作为唯一标识</li>
+            <li>指定默认值：SQL允许指定默认值，在插入行时如果不给出值，DBMS将采用默认值</br>
+              <code>CREATE TABLE OrderItems
+                    (order_num INTEGER NOT NULL,
+                     order_item INTEGER NOT NULL,
+                     prod_id CHAR(10) NOT NULL,
+                     quantity INTEGER NOT NULL DEFAULT 1,
+                     item_price DECIMAL(8,2) NOT NULL);</code>
+            </li>
+            <li>默认值经常用于日期和时间戳列：</br>
+              - Access(NOW( ))</br>
+              - DB2(CURRENT_DATE)</br>
+              - MySQL(CURRENT_DATE( ))</br>
+              - Oracle(SYSDATE)</br>
+              - PostgreSQL(CURRENT_DATE)</br>
+              - SQL Server(GETDATE( ))</br>
+              - SQLite(date(‘now’))</br>
+            </li>
+            <li>更新表:ALTER TABLE语句：更新表定义，可以使用ALTER TABLE语句</li>
+            <li>使用ALTER TABLE时需要考虑：</br>
+              - 不要在表中包含数据时对其进行更新；</br>
+              - 所有的DBMS都允许给现有的表增加列，不过对所增加列的数据类型有所限制；</br>
+              - 许多DBMS不允许删除或更改表中的列；</br>
+              - 多数DBMS允许重新命名表中的列；</br>
+              - 许多DBMS限制对已经填有数据的列进行更改，对未填有数据的列几乎没有限制</br>
+            </li>
+            <li>使用ALTER TABLE更改表结构时</br>
+                必须给出要更改的表名；</br>
+                列出要做哪些更改</br>
+              <code>ALTER TABLE Vendors  ADD vend_phone CHAR(20);</code></br>
+              <code>ALTER TABLE Vendors DROP COLUMN vend_phone;</code></br>
+            </li>
+            <li>复杂表的删除步骤：</br>
+              - 用新的列布局创建一个新表；</br>
+              - 使用INSERT SELECT 语句从旧表复制数据到新表；</br>
+              - 检验包含所需数据的新表；</br>
+              - 重命名旧表（如果确定，可以删除它）；</br>
+              - 用旧表原来的名字重命名新表；</br>
+              - 根据需要，重新创建触发器、存储过程、索引和外键</br>
+            </li>
+            <li> 删除表</br><code>DROP TABLE CustCopy;</code></li>
+            <li>删除表没有确认，也不能撤销，执行这条语句将永久删除该表</li>
+            <li>使用关系规则防止意外删除：如果对某个表发布一条DROP TABLE语句，且该表是某个关系的组成部分，则DBMS将阻止这条语句的执行，直到该关系被删除为止</li>
+            <li>重命名表：所有重命名操作的基本语法都要求指定旧表名和新表名</li>
+          </ol>
+        </div>
+      </div>
       
     </div>
   </div>
