@@ -641,6 +641,111 @@
           </ol>
         </div>
       </div>
+      <div class="content">
+        <div class="section">
+          <h4>插入数据</h4>
+          <ul>
+            <li>如何将行插入到数据库表中</li>
+            <li>INSERT的几种方法，为什么要明确使用列名</li>
+            <li>如何利用INSERT SELECT从其他表中导入行</li>
+            <li>如何用SELECT INTO将行导出到一个新表</li>
+          </ul>
+        </div>
+        <div class="section">
+          <h4>组合查询</h4>
+          <ol>
+            <li>INSERT语句：用来将行插入到数据库表</li>
+            <li>插入方式：</br>
+                插入完整的行；</br>
+                插入行的一部分；</br>
+                插入某些查询的结果</br>
+            </li>
+            <li>系统安全：使用INSERT语句可能需要客户端／服务器DBMS中的特定安全权限</li>
+            <li>插入完整的行：使用基本的INSERT语法，要求指定表名和插入到新行中的值 INSERT INTO 表名 VALUES 各列值</li>
+            <li>存储到表中每一列的数据在VALUES子句中给出，必须给每一列提供一个值。如果某列没有值，则应该使用NULL值；各列必须以它们在表定义中出现的次序填充</li>
+            <li>INTO关键字：是可选的，为保证SQL代码在DBMS之间可移植，最好提供这个关键字</li>
+            <li>安全性：应该避免使用这种语法，高度依赖表中列的定义次序，不能保证各列在下一次表结构变动后保持完全相同的次序</li>
+            <li>推荐方法：在表名后的括号里明确给出列名。在插入行时，DBMS用VALUES列表中的相应值填入到列表中的对应项。VALUES必须以其指定的次序提供其指定的次序匹配指定的列名，不一定按各列出现在表中的实际次序。优点是，表的结构改变，这条INSERT语句仍然能正确工作</br>
+              <code>INSERT INTO Customers(cust_id,
+                                    cust_name,
+                                    cust_address,
+                                    cust_city,
+                                    cust_state,
+                                    cust_zip,
+                                    cust_country,
+                                    cust_contact,
+                                    cust_email)
+              VALUES('1000000006',
+                     'Toy Land',
+                     '123 Any Street',
+                     'New York',
+                     'NY',
+                     '11111',
+                     'USA',
+                     NULL,
+                     NULL);</code>
+            </li>
+            <li>不要使用没有明确给出列的INSERT语句</li>
+            <li>不管使用哪种INSERT语法，VALUES的数目都必须正确</li>
+            <li>插入部分行</br>省略列：如果表的定义允许，INSERT语法可以省略列，这表示可以给某些列提供值，给其他列不提供值</br>
+                <code>INSERT INTO Customers(cust_id,
+                                      cust_name,
+                                      cust_address,
+                                      cust_city,
+                                      cust_state,
+                                      cust_zip,
+                                      cust_country)
+                VALUES('1000000006',
+                       'Toy Land',
+                       '123 Any Street',
+                       'New York',
+                       'NY',
+                       '11111',
+                       'USA');</code>
+            </li>
+            <li>省略列的条件：该列定义为允许NULL值；在表定义中给出默认值</li>
+            <li>如果表中不允许有NULL值或默认值，这时省略了表中的值，DBMS会产生错误消息，相应的行不能成功插入</li>
+            <li>插入检索出的数据</br>INSERT SELECT：由一条INSERT语句和一条SELECT语句组成</br>
+                例子：把另一表中的顾客列合并到Customers表中</br>
+                <code>INSERT INTO Customers(cust_id,
+                                      cust_name,
+                                      cust_address,
+                                      cust_city,
+                                      cust_state,
+                                      cust_zip,
+                                      cust_country,
+                                      cust_contact,
+                                      cust_email)
+                SELECT  cust_id,
+                        cust_name,
+                        cust_address,
+                        cust_city,
+                        cust_state,
+                        cust_zip,
+                        cust_country,
+                        cust_contact,
+                        cust_email
+                FROM CustNew;</code>
+            </li>
+            <li>从一个名为CustNew的表中读出数据并插入到Customers表。为了验证这个例子，首先需要创建和填充CustNew表，两个表的结构需要相同，填充数据时，不应该使用已经在Customers中用过的cust_id值。SELECT语句从CustNew检索出要插入的值，而不是列出它们；SELECT中列出的每一列对应于Customers表名后所跟的每一列。如果CustNew表中没有数据，则没有行被插入，但是操作仍然是合法的；如果表中有数据，则所有数据将被插入到Customers中</li>
+            <li>INSERT SELECT中的列名：DBMS不关心SELECT返回的列名，它使用的是列的位置</li>
+            <li>INSERT SELECT中的SELECT语句可以包含WHERE子句，以过滤插入的数据</li>
+            <li>从一个表复制到另一个表</br>
+                SELECT INTO语句：将一个表的内容复制到另一个全新的表（运行中创建的表）</br>
+                与INSERT SELECT将数据添加到一个已经存在的表不同，SELECT INTO将数据复制到一个新表</br>
+                INSERT SELECT与SELECT INTO的重要差别：前者导出数据，后者导入数据</br>
+                <code>SELECT * INTO CustCopy FROM Customers;</code>
+            </li>
+          <li>SELECT语句创建一个名为CustCopy的新表，并把Customers表的整个内容复制到新表中。因为这里使用SELECT*，所以将在CustCopy表中创建（并填充）与Customers表的每一列相同的列。要想只复制部分的列，可以明确给出列名，而不是使用*通配符</li>
+          <li>使用SELECT INTO的注意事项：</br>
+              任何SELECT选项和子句都可以使用，包括WHERE和GROUP BY；</br>
+              可利用联结从多个表插入数据；</br>
+              不管从多少个表中检索数据，数据都只能插入到一个表中</br>
+          </li>
+          <li>进行表的复制：在复制的数据上测试SQL代码，不会影响实际数据</li>
+          </ol>
+        </div>
+      </div>
     </div>
   </div>
   <div class="footer"></div>
