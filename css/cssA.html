@@ -63,21 +63,44 @@
         </div>
         <div class="section">
           <ol>
-            <li>类选择器（class selector）：允许以一种独立于文档元素的方式来指定样式。要应用样式而不考虑具体涉及的元素，可以用类选择器，修改具体的文档标记。为了将一个类选择器与元素关联，必须将class属性指定为一个适当的值</br>
+            <li>类选择器（class selector）：</br>允许以一种独立于文档元素的方式来指定样式。要应用样式而不考虑具体涉及的元素，可以用类选择器，修改具体的文档标记。为了将一个类选择器与元素关联，必须将class属性指定为一个适当的值</br>
               <code>p.warning {font-weight: bold;}</code> 选择器会匹配class属性包含值warning的所有p元素。每个规则只应用于某种特定类型的元素/类组合，不会影响其他元素。</br>
               <code>.warning {font-weight:bold;}  span.warning {color: red;}</code> 结合使用通用选择器和特定选择器设置样式。可以忽略星号，选择类名相同的所有元素</br>
                 多类选择器：通过把两个类选择器链接在一起，仅可以选择同时包含这些类名的元素（类名的顺序不限）</br>
               <code>p.warning.urgent{ background:red; }</code>
             </li>
-            <li>ID选择器（ID selector）：ID选择器用#棋盘号而不是点号；ID选择器引用id属性中的值；id选择器也可以忽略星号通配符</br>
-              <code>#first { font-weight:bold; }</code>
+            <li>ID选择器（ID selector）：</br>ID选择器用#棋盘号而不是点号；ID选择器引用id属性中的值；id选择器也可以忽略星号通配符</br>
+              <code>#first { font-weight:bold; }</code></br>
+                类选择器和ID选择器区分大小写，取决于文档语言。</br>
+                类选择器和文档选择器的区别：在一个HTML文档中，ID选择器只使用一次，一个ID值标记一个元素；不同于类选择器，ID选择器不能结合使用，因为ID属性不允许有以空格分隔的词列表；id名比class名n能包含更多含义</br>
+                相似性：类似于类，可以独立于元素来选择ID
             </li>
-            <li>通配符选择器（universal selector）：<code>* {color:red;}</code>这个声明等价于列出了文档中所有元素的一个分组选择器；</br>
+            <li>通配符选择器（universal selector）：</br><code>* {color:red;}</code>这个声明等价于列出了文档中所有元素的一个分组选择器；</br>
                 除了可以对选择器分组，也可以对声明分组。对声明分组时，一定要在各个声明的最后使用分号。浏览器会忽略样式表中的空白符，而且用户代理必须依赖正确的语法才能解析样式表</li>
-            <li>元素选择器：文档中的某个元素，是最基本的选择器</li>
-            <li>分组选择器：为多个元素应用同一个样式，元素之间用逗号分隔 <code>h1,h2,h3,p{color:gray;}</code></li>
-            <li>属性选择器：</li>
-            <li>伪类选择器：</li>
+            <li>元素选择器：</br>文档中的某个元素，是最基本的选择器</li>
+            <li>分组选择器：</br>为多个元素应用同一个样式，元素之间用逗号分隔 <code>h1,h2,h3,p{color:gray;}</code></li>
+            <li>属性选择器(attribute selector)：</br>
+                根据元素的属性及属性值来选择元素</br>
+                简单属性选择：选择有某个属性的元素，而不论该属性的值是什么 <code>h1[class] { color:silver; }</code> 可以将多个属性选择器链接在一起，对多个属性进行选择</br>
+                根据具体属性值选择：选择有特定属性值的元素，这种格式要求必须与属性值完全匹配<code>p[class="urgent warning"] { font-weight: bold; }</code>注意ID选择器与指定id属性的属性选择器有微妙但重要的差别</br>
+                根据部分属性值选择：可以根据其中的任意一个词进行选择。<code>p[class~="warning"] {font-weight:bold;}</code>波浪号（~）根据属性值中出现的一个用空格分隔的词来完成选择
+                特定属性选择类型：<code>[lang |= 'en'] {color:white;}</code>这个规则会选择lang属性等于en或以en-开头的所有元素
+            </li>
+            <li>伪类选择器：</br>
+                锚元素：在HTML和XHTML中，锚元素会建立从一个文档到另一个文档的链接。要区别哪些链接是已访问的，需要将文档中的链接与用户的浏览历史相比较。
+                基本的锚类型：已访问和未访问，这些类型称为伪类（pseudo-class），使用这些伪类的选择器称为伪类选择器（pseudo-class selector）。CSS定义了伪类，使已访问页面的锚自带visited伪类，注意规则中的冒号（:）<code>a:visited {color:red;}</code></br>
+                链接伪类：伪类名 :link 指示作为超链接并指向一个未访问地址的所有锚<code>a:link{color:navy;}</code>；:visited 指示作为已访问地址超链接的所有锚<code>a:visited{color:gray;}</code>；类选择器如何与伪类结合，在带特定类的锚元素上使用伪类，语法也适用于ID选择器</br>
+                动态伪类：伪类名 :focus指示当前拥有输入焦点的元素，可以接受键盘输入或者能以某种方式激活的元素<code>a:focus{color:red;}</code>；:hover指示鼠标指针停留在哪个元素上<code>a:hover{color:yellow;}</code>；:active指示被用户输入激活的元素<code>a:active{color:blue;}</code></br>
+                选择第一个子元素：选择元素的第一个子元素:first-child 常常遭到误解 <code>p:first-child {font-weight: bold;}</code> 这个规则将作为某元素第一个子元素的所有p元素设置为粗体
+                根据语言选择：使用伪类:lang( )来根据元素的语言来选择<code>:lang(fr) {font-style:italic;}</code></br>
+                结合伪类：在同一个选择器中结合使用伪类，顺序不重要，但是不能把互拆的伪类结合在一起使用 <code>a:link:hover {color:red;}</code>
+            </li>
+            <li>伪元素选择器：</br>
+                设置首字母样式：用于设置一个块级元素首字母的样式 <code>p:first-letter {color:red;}</code></br>
+                设置第一行样式：用于设置元素中的第一个文本行 <code>p:first-line {color:purple;}</code> :first-line和:first-letter都有所限制，只能应用于标记段落之类的块级元素不能用于行内元素；同时对能应用的属性也有所限制。所有伪元素都必须放在出现该伪元素的选择器的最后面</br>
+                设置之前样式：在伪元素前插入生成的内容，然后使用伪元素:before直接设置样式 <code>h2::before {content: "{}"; color:silver;}</code></br>
+                设置之后样式：在伪元素之后插入生成的内容，并设置样式 <code>body::after {content: "The End.";}</code></br>
+            </li>
           </ol>
           <div class="image">
             <img src="../images/css/css-selector-1.png" alt="css-selector-1">
