@@ -101,6 +101,12 @@
                 设置之前样式：在伪元素前插入生成的内容，然后使用伪元素:before直接设置样式 <code>h2::before {content: "{}"; color:silver;}</code></br>
                 设置之后样式：在伪元素之后插入生成的内容，并设置样式 <code>body::after {content: "The End.";}</code></br>
             </li>
+            <li>使用文档结构：</br>
+                理解父子关系：HTML文档以元素的一种层次结构为基础，元素之间存在父子关系。文档中的每个元素要么是另一个元素的父元素，要么是另一个元素的子元素，而且通常兼而有之。可以从文档的树视图了解这种层次结构</br>
+                后代选择器（descendant selector/contextual selector）：</br><code>h1 em {color: gray;}</code> 规则左边的后代选择器中包含两个或多个用空格分隔的选择器，选择器之间的空格是一种结合符（combinator）后代选择器的两个元素之间的层次间隔可以是无限的。</br>
+                选择子元素：不想选择后代元素，只想选择另一个元素的子元素<code>h1 > strong{color:red;}</code> 选择作为h1元素子元素的所有strong元素。查看文档的树结构，子选择器限制为只匹配树中直接相连的元素</br>
+                选择相邻兄弟元素（adjacentsibling combinator）：选择紧接在另一个元素后的元素，而且二者具有相同的父元素，可以使用相邻兄弟结合符。<code>h1+p {margin:0;}</code>这个选择器读作“选择紧接在一个h1元素后出现的所有段落，h1要与所有p元素有共同的父元素”用一个结合符只能选择两个相邻兄弟中的第二个元素 
+            </li>
           </ol>
           <div class="image">
             <img src="../images/css/css-selector-1.png" alt="css-selector-1">
