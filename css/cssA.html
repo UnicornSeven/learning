@@ -177,12 +177,14 @@
         <h3>字体</h3>
         <div class="section">
           <ol>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li>设置字体属性是样式表最常见的用途之一</li>
+            <li>字体系列：相同的字体有不同的称呼，字体可能由许多字体变形组成，分别用来描述粗体、斜体文本等等。例如，Times是变形字体的一个组合，是一个字体系列（font-family），每种变形都是一个具体的字体风格（font-face）</li>
+            <li>使用通用字体系列：可以使用属性font-family在文档中采用上述任何字体系列<code>body {font-family:sans-serif;}</code></br>指定字体系列：<code>h1 {font-family:Georgia;}</code>如果用户代理上该字体不能使用，则可能会使用默认字体代替</br>通过结合特定字体和通用字体系列：<code>h1 {font-family: Georgia, serif;}</code></br>使用引号：只有当一个字体名中有一个或多个空格，或字体名包含符号，才需要在font-family声明中加引号</li>
+            <li>字体加粗：属性font-family；值normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | inherit</li>
+            <li>字体大小：属性font-size；值xx-small | x-small | small | medium | large | x-large | xx-large | smaller | larger | <length> | <percentage> | inherit</br>绝对大小：7个绝对大小值；</br>相对大小：关键字larger和smaller；</br>百分数和大小：百分数值根据从父元素继承的大小来计算；字体大小和继承：字体大小是可以继承的，继承的是计算值而不是百分数</li>
+            <li>使用长度单位：以下所有font-size声明都是等价的</br>
+              <code>p.one {font-size:36pt;}</br>p.two {font-size: 3pc;}</br>p.three {font-size: 0.5in;}</br> p.four {font-size: 1.27cm;} </br> p.five {font-size: 12.7mm;}</code>
+            </li>
           </ol>
         </div>
       </div>
