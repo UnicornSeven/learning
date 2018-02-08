@@ -199,19 +199,37 @@
           <ol>
             <li>文本和字体之间的区别：文本是内容，而字体用于显示这个内容。使用文本属性，可以控制文本相对于该行余下内容的位置、使其作为上标、加下划线，以及改变大小写等。</li>
             <li>缩进和水平对齐：</br>
-                缩进文本：将Web页面上一个段落的第一行缩进，这是一种最常用的文本格式化效果。属性text-indent，值 <length> | <percentage> | inherit </br>
+                缩进文本：将Web页面上一个段落的第一行缩进，这是一种最常用的文本格式化效果。属性text-indent，值 length | percentage | inherit </br>
                 一般地，可以为所有块级元素应用text-indent，但无法将这个属性应用到行内元素 <code> p {text-indent: 4em; }</code> </br>
-                水平对齐：影响一个元素文本行相互之间的对齐方式；属性 text-align；值 left | center | right | justify | <string> | inherit </br>
-                垂直对齐：line-height属性是指文本行基线之间的距离，而不是字体的大小，它确定了将各个元素框的高度增加或减少多少。line-height值和字体大小之差就是行间距。
-                属性：line-height；值 <length> | <percentage> | <number> | normal | inherit</br>
-                构造文本行：文本行中的每个元素都会生成一个内容区，这由字体的大小确定。这个内容区则会生成一个行内框（inline box），如果不存在其他因素，这个行内框就完全等于该元素的内容区。
             </li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li>水平对齐：影响一个元素文本行相互之间的对齐方式；属性 text-align；值 left | center | right | justify | string | inherit </br></li>
+            <li>垂直对齐：line-height属性是指文本行基线之间的距离，而不是字体的大小，它确定了将各个元素框的高度增加或减少多少。line-height值和字体大小之差就是行间距。</li>
+            <li>属性：line-height；值 <code>length | percentage | number | normal | inherit</code></li>
+            <li>构造文本行：文本行中的每个元素都会生成一个内容区，这由字体的大小确定。这个内容区则会生成一个行内框（inline box），如果不存在其他因素，这个行内框就完全等于该元素的内容区。</li>
+            <li>要确定一个给定元素的行间距，只需将line-height的计算值减去font-size的计算值</li>
+            <li>行高和继承：当一个块级元素从另一个元素继承line-height时，要从父元素计算，而不是在子元素上计算。指定一个数时，缩放因子将是继承值而不是计算值。<code>div {line-height: 1.5;} </br> p {font-size: 18px;}</code></li>
+            <li>垂直对齐文本：只应用于行内元素和替换元素。属性：vertical-align；值 baseline | sub | super | top | text-top | middle | bottom | text-bottom | percentage | length | inherit</li>
+            <li>基线对齐：vertical-align: baseline要求一个元素的基线与其父元素的基线对齐</li>
+            <li>上标和下标： vertical-align: sub会使一个元素变成下标，这意味着其基线相对于其父元素的基线降低；super刚好与sub相反，它将元素的基线相对于父元素的基线升高。</li>
+            <li>底端对齐：vertical-align:bottom将元素行内框的底端与行框的底端对齐。</br> vertical-align: text-bottom是指行内文本的底端</br> 顶端对齐：vertical-align: top效果与bottom刚好相反；
+                vertical-align: text-top效果则与text-bottom效果相反</br>
+                居中对齐：middle，往往应用于图像，会把行内元素框的中点与父元素基线上方0.5ex处的一个点对齐</br>
+                百分数：为vertical-ailgn设置一个百分数，会把元素的基线相对于父元素的基线升高或降低指定的量（计算该元素line-height的百分数，而不是相对于其父元素的line-height）。</br>
+                长度对齐：<code>vertical-align: 5px;</code> 所有垂直对齐的元素都会影响行高。
+            </li>
+            <li>字间隔和字母间隔：</br>
+                字间隔： word-spacing 属性接受一个正长度值或负长度值。属性：word-spacing；值 length | normal | inherit </br>
+                字母间隔： letter-spacing修改字符或字母之间的间隔。属性：letter-spacing; 值：length | normal | inherit </br>
+                间隔和对齐：word-spacing的值可能受text-align属性值的影响
+            </li>
+            <li>文本转换：属性 text-transform；值 uppercase | lowercase | capitalize | none | inherit</li>
           </ol>
+        </div>
+      </div>
+      <div class="content">
+        <h3></h3>
+        <div class="section">
+
         </div>
       </div>
     </div>
