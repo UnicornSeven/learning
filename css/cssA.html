@@ -197,8 +197,15 @@
         <h3>文本属性</h3>
         <div class="section">
           <ol>
-            <li></li>
-            <li></li>
+            <li>文本和字体之间的区别：文本是内容，而字体用于显示这个内容。使用文本属性，可以控制文本相对于该行余下内容的位置、使其作为上标、加下划线，以及改变大小写等。</li>
+            <li>缩进和水平对齐：</br>
+                缩进文本：将Web页面上一个段落的第一行缩进，这是一种最常用的文本格式化效果。属性text-indent，值 <length> | <percentage> | inherit </br>
+                一般地，可以为所有块级元素应用text-indent，但无法将这个属性应用到行内元素 <code> p {text-indent: 4em; }</code> </br>
+                水平对齐：影响一个元素文本行相互之间的对齐方式；属性 text-align；值 left | center | right | justify | <string> | inherit </br>
+                垂直对齐：line-height属性是指文本行基线之间的距离，而不是字体的大小，它确定了将各个元素框的高度增加或减少多少。line-height值和字体大小之差就是行间距。
+                属性：line-height；值 <length> | <percentage> | <number> | normal | inherit</br>
+                构造文本行：文本行中的每个元素都会生成一个内容区，这由字体的大小确定。这个内容区则会生成一个行内框（inline box），如果不存在其他因素，这个行内框就完全等于该元素的内容区。
+            </li>
             <li></li>
             <li></li>
             <li></li>
