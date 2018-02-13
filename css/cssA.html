@@ -293,6 +293,16 @@
                 sub 与super相同，只不过元素会下移而不是上移。</br>
                 percentage 将元素上移或下移一定距离，这个距离由相对于元素line-height值指定的一个百分数确定
             </li>
+            <li>管理line-height：改变一个行内元素的line-height可能导致文本行相互重叠。</br>
+              如何避免内容重叠：对font-size有改变的元素结合使用em单位。line-height相对于元素本身的font-size设置，而不是相对于父元素设置。二是增加段落的line-height，会影响整个元素中的每一行，而不只是出现加边框超链接的那一行。
+            </li>
+            <li>缩放行高：设置line-height最好的办法是使用一个原始数字，作为一个缩放因子，而该因子是一个继承值而非计算值。还有一种最简单的方法，即适当设置样式，使行高恰好能包含行内容，设置line-height值1.0，使每个元素行内款与内容区相同</li>
+            <li>增加框属性：行内元素的边框边界由font-size而不是line-height控制，不受内边距、外边距和边框的影响。</li>
+            <li>行内替换元素：一般认为行内替换元素有固有的高度和宽度，换句话说，会用替换元素整体（包括内容、外边距、边距和内边距）来定义元素的行内框。替换元素可以增加行框的高度，但不影响line-height的值。然而，行内替换元素需要一个line-height值，在垂直对齐时才能正确地定位元素。</li>
+            <li>增加框属性：行内替换元素应用内边距和边框会影响行框高度，它们会作为行内替换元素行内框的一部分。设置负外边距会使行内框小于正常大小，挤入其它行。</li>
+            <li>替换元素和基线：默认行内替换元素位于基线上，如果向替换元素增加下内边距、外边距或边框，内容区会上移。</li>
+            <li>改变元素显示：属性 display； 值 none | inline | block | inline-block | list-item | run-in | table | inline-table | table-row-group | table-header-group | table-footer-group | table-row |table-column-group | table-column | table-cell | table-caption | inherit</li>
+            <li>改变角色：想设置一个文档的样式，可以通过改变元素的显示角色来实现。假设一个div中有一系列链接，想把div布局为一个垂直边栏。一可以把所有链接都放在表单元格中；二可以把每个链接都包在自己的div中；三可以把它们设置为块级元素 <code>div#navigation a { display:block; }</code></li>
           </ol>
         </div>
       </div>
