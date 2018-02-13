@@ -235,6 +235,7 @@
       <div class="content">
         <h3>基本视觉格式化</h3>
         <div class="section">
+          <h4>基本框</h4>
           <ol>
             <li>基本框：</br>
                 元素框：CSS假定每个元素都会生成一个或多个矩形框。各元素框中心有一个内容区，内容区周围有可选的内边距、边框和外边距
@@ -248,6 +249,11 @@
                 行内元素：指strong或span之类的元素，不会生成“行分隔符”。通过声明dispaly: inline，可以让元素生成一个行内框</br>
                 根元素：位于文档树顶端的元素
             </li>
+          </ol>
+        </div>
+        <div class="section">
+          <h4>块级元素</h4>
+          <ol>
             <li>块级元素：一般地，一个元素的width被定义为从左内边界到右内边界的距离，height则是从上内边界到下内边界的距离。</li>
             <li>水平格式化：正常流中块级元素框的水平部分总和就等于父元素的width</li>
             <li>水平属性：margin-left、border-left、padding-left、width、padding-right、border-right、margin-right，这7个属性的值加在一起是元素包含块的宽度</li>
@@ -265,6 +271,11 @@
             <li>合并垂直外边距：垂直格式化的另一个重要方面是垂直相邻外边距的合并。这种合并行为只应用于外边距，如果元素有内边距和边框，它们绝对不会合并</li>
             <li>负外边距：负外边距会影响外边距如何合并。如果垂直外边距都设置为负值，浏览器会取两个外边距绝对值的最大值；如果一个正外边距与一个负外边距合并，会从正外边距减去这个负外边距的绝对值</li>
             <li>列表项：列表项有自身的一些规则。</li>
+          </ol>
+        </div>
+        <div class="section">
+          <h4>行内元素</h4>
+          <ol>
             <li>行内元素：</br>
                 行布局：内联内容如何布局
             </li>
@@ -301,8 +312,16 @@
             <li>行内替换元素：一般认为行内替换元素有固有的高度和宽度，换句话说，会用替换元素整体（包括内容、外边距、边距和内边距）来定义元素的行内框。替换元素可以增加行框的高度，但不影响line-height的值。然而，行内替换元素需要一个line-height值，在垂直对齐时才能正确地定位元素。</li>
             <li>增加框属性：行内替换元素应用内边距和边框会影响行框高度，它们会作为行内替换元素行内框的一部分。设置负外边距会使行内框小于正常大小，挤入其它行。</li>
             <li>替换元素和基线：默认行内替换元素位于基线上，如果向替换元素增加下内边距、外边距或边框，内容区会上移。</li>
+
+          </ol>
+        </div>
+        <div class="section">
+          <h4>改变元素显示</h4>
+          <ol>
             <li>改变元素显示：属性 display； 值 none | inline | block | inline-block | list-item | run-in | table | inline-table | table-row-group | table-header-group | table-footer-group | table-row |table-column-group | table-column | table-cell | table-caption | inherit</li>
-            <li>改变角色：想设置一个文档的样式，可以通过改变元素的显示角色来实现。假设一个div中有一系列链接，想把div布局为一个垂直边栏。一可以把所有链接都放在表单元格中；二可以把每个链接都包在自己的div中；三可以把它们设置为块级元素 <code>div#navigation a { display:block; }</code></li>
+            <li>改变角色：想设置一个文档的样式，可以通过改变元素的显示角色来实现。假设一个div中有一系列链接，想把div布局为一个垂直边栏。一可以把所有链接都放在表单元格中；二可以把每个链接都包在自己的div中；三可以把它们设置为块级元素 <code>div#navigation a { display:block; }</code>记住，改变的只是元素的显示角色，而不是其本质</li>
+            <li>行内块元素：</li>
+            <li></li>
           </ol>
         </div>
       </div>
