@@ -320,7 +320,8 @@
           <ol>
             <li>改变元素显示：属性 display； 值 none | inline | block | inline-block | list-item | run-in | table | inline-table | table-row-group | table-header-group | table-footer-group | table-row |table-column-group | table-column | table-cell | table-caption | inherit</li>
             <li>改变角色：想设置一个文档的样式，可以通过改变元素的显示角色来实现。假设一个div中有一系列链接，想把div布局为一个垂直边栏。一可以把所有链接都放在表单元格中；二可以把每个链接都包在自己的div中；三可以把它们设置为块级元素 <code>div#navigation a { display:block; }</code>记住，改变的只是元素的显示角色，而不是其本质</li>
-            <li>行内块元素：</li>
+            <li>行内块元素（inline-block element）块级元素和行内元素的混合。行内块元素会作为替换元素放在行中，底端默认位于文本行的基线上，而且内部没有分隔符。其实就是把块级元素放在行中。行内块元素自动调整大小，例如，设计5个超链接在一个工具条中宽度相等 <code>#navbar a { display:inline-block; width:20%; }</code></li>
+            <li>run-in元素：块/行内元素混合。如果一个元素生成一个run-in框，而且该框后面是一个块级框，那么该run-in元素将成为块级框开始处的一个行内框。</li>
             <li></li>
           </ol>
         </div>
