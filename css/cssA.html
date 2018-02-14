@@ -331,11 +331,22 @@
         <div class="section">
           <h4>基本元素框</h4>
           <ol>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li>所有文档元素都生成一个矩形框，成为元素框（element box）描述了一个元素在文档布局中所占的空间大小。每个框影响着其它元素框的位置和大小。</li>
+            <li>宽度和高度：一个元素的width被定义为从左内边界到右内边界的距离，height被定义为从上内边界到下内边界的距离。两个属性不能应用到行内非替换元素。</li>
+            <li>外边框和内边距：有三种方法在元素外围生成额外的空间。一增加内边距；二增加外边距；三同时增加内边距和外边距。</li>
+            <li>外边距：margin可以接受任何长度度量，可以是像素、英寸、毫米或em，默认值为0。</br>
+                长度值和外边距：设置元素的外边距时，可以使用任何长度值。<code>p { background:silver; margin: 10px; }</code> margin: top right bottom left</br>
+                百分数和外边距：可以对元素的外边距设置百分数值，百分数是相对于父元素的width值计算的。</br>
+                值复制：CSS制定了一些规则，允许为外边距指定少于4个值。上下左右指定两个值是上下一个值，左右一个值；如果缺少右外边距的值，则使用上外边距的值。</br>
+                单边外边距属性：margin-top、margin-right、margin-bottom、margin-left</br>
+                负外边距和合并外边距：可以为元素设置负外边距。会导致元素框超出其父元素，或者与其它元素重叠，但并不违反框模型。</br>
+                外边距和行内元素：行内非替换元素应用上下外边距，对行高没有任何影响；左右外边距正常显示；应用负外边距，不会影响元素的上下外边距跟行高，但会使左右两端与其它内容重叠</br>
+            </li>
+            <li>边框（border）：元素的边框就是围绕元素内容和内边距的一条或多条线。边框默认有3个方面：宽度、样式、颜色。默认的边框颜色是元素本身的前景色；如果没有为边框声明颜色，它将与元素的文本颜色相同。</br>
+            边框和背景：边框绘制在元素的背景之上。有样式的边框，属性 border-style；值 none | hidden | dotted | dashed | solid | double | groove |ridge | inset | outset | inherit</br>
+            多种样式：顺序 top-right-bottom-left | top-right/left-bottom | top/bottom-right/left</br>
+            单边样式：属性 border-top-style | border-right-style | border-bottom-style | border-left-style
+            </li>
           </ol>
         </div>
       </div>
