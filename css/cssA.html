@@ -334,21 +334,66 @@
             <li>所有文档元素都生成一个矩形框，成为元素框（element box）描述了一个元素在文档布局中所占的空间大小。每个框影响着其它元素框的位置和大小。</li>
             <li>宽度和高度：一个元素的width被定义为从左内边界到右内边界的距离，height被定义为从上内边界到下内边界的距离。两个属性不能应用到行内非替换元素。</li>
             <li>外边框和内边距：有三种方法在元素外围生成额外的空间。一增加内边距；二增加外边距；三同时增加内边距和外边距。</li>
-            <li>外边距：margin可以接受任何长度度量，可以是像素、英寸、毫米或em，默认值为0。</br>
-                长度值和外边距：设置元素的外边距时，可以使用任何长度值。<code>p { background:silver; margin: 10px; }</code> margin: top right bottom left</br>
-                百分数和外边距：可以对元素的外边距设置百分数值，百分数是相对于父元素的width值计算的。</br>
-                值复制：CSS制定了一些规则，允许为外边距指定少于4个值。上下左右指定两个值是上下一个值，左右一个值；如果缺少右外边距的值，则使用上外边距的值。</br>
-                单边外边距属性：margin-top、margin-right、margin-bottom、margin-left</br>
-                负外边距和合并外边距：可以为元素设置负外边距。会导致元素框超出其父元素，或者与其它元素重叠，但并不违反框模型。</br>
-                外边距和行内元素：行内非替换元素应用上下外边距，对行高没有任何影响；左右外边距正常显示；应用负外边距，不会影响元素的上下外边距跟行高，但会使左右两端与其它内容重叠</br>
-            </li>
-            <li>边框（border）：元素的边框就是围绕元素内容和内边距的一条或多条线。边框默认有3个方面：宽度、样式、颜色。默认的边框颜色是元素本身的前景色；如果没有为边框声明颜色，它将与元素的文本颜色相同。</br>
-            边框和背景：边框绘制在元素的背景之上。有样式的边框，属性 border-style；值 none | hidden | dotted | dashed | solid | double | groove |ridge | inset | outset | inherit</br>
-            多种样式：顺序 top-right-bottom-left | top-right/left-bottom | top/bottom-right/left</br>
-            单边样式：属性 border-top-style | border-right-style | border-bottom-style | border-left-style
-            </li>
           </ol>
         </div>
+        <div class="section">
+          <h4>外边距</h4>
+          <ol>
+            <li>margin可以接受任何长度度量，可以是像素、英寸、毫米或em，默认值为0。</li>
+            <li>长度值和外边距：设置元素的外边距时，可以使用任何长度值。<code>p { background:silver; margin: 10px; }</code> margin: top right bottom left</li>
+            <li>百分数和外边距：可以对元素的外边距设置百分数值，百分数是相对于父元素的width值计算的。</li>
+            <li>值复制：CSS制定了一些规则，允许为外边距指定少于4个值。上下左右指定两个值是上下一个值，左右一个值；如果缺少右外边距的值，则使用上外边距的值。</li>
+            <li>单边外边距属性：margin-top、margin-right、margin-bottom、margin-left</li>
+            <li>负外边距和合并外边距：可以为元素设置负外边距。会导致元素框超出其父元素，或者与其它元素重叠，但并不违反框模型。</li>
+            <li>外边距和行内元素：行内非替换元素应用上下外边距，对行高没有任何影响；左右外边距正常显示；应用负外边距，不会影响元素的上下外边距跟行高，但会使左右两端与其它内容重叠</li>
+          </ol>              
+        </div>
+        <div class="section">
+          <h4>边框（border）</h4>
+          <ol>
+            <li>元素的边框就是围绕元素内容和内边距的一条或多条线。边框默认有3个方面：宽度、样式、颜色。默认的边框颜色是元素本身的前景色；如果没有为边框声明颜色，它将与元素的文本颜色相同。</li>
+            <li>边框和背景：边框绘制在元素的背景之上。有样式的边框，属性 border-style；值 none | hidden | dotted | dashed | solid | double | groove |ridge | inset | outset | inherit</li>
+            <li>多种样式：顺序 top-right-bottom-left | top-right/left-bottom | top/bottom-right/left</li>
+            <li>单边样式：属性 border-top-style | border-right-style | border-bottom-style | border-left-style</li>
+            <li>边框宽度：属性 border-width； 值 thin | medium | thick | length | inherit </li>
+            <li>单边属性：border-top-width | border-right-width | border-bottom-width | border-left-width</li>
+            <li>如果没有声明样式，就相当于声明border-style: none
+            边框颜色：属性 border-color；值 color | transparent | inherit 如果没有声明颜色，默认颜色则是元素的前景色。单边属性：border-top-color | border-right-color | border-bottom-color | border-left-color</li>
+            <li>透明边框：值transparent用于创建有宽度的不可见边框
+            </li>
+          </ol>         
+        </div>
+        <div class="section">
+          <h4>内边距</h4>
+          <ol>
+            <li>元素框的内边距在边框和内容之间。属性 padding；值 length | percentage | inherit 默认地，元素没有内边距，元素的边框与元素本身的内容相当接近。设置段落时，外边距会合并，内边距不合并。<code>p { margin: 0; padding: 0.5em, 0; }</code></li>
+            <li>百分数值和内边距：可以为元素的内边距设置百分数，百分数值要相对于其父元素的width计算。上下内边距与左右内边距一致，上下内边距的百分数也是相对于父元素宽度计算而不是相对于高度。</li>
+            <li>单边内边距：padding-top | padding-right | padding-bottom | padding-left</li>
+            <li>内边距和行内元素：理论上，对于有背景色和内边距的行内非替换元素，背景可以向元素上面和下面延伸，不改变行高。</li>
+            <li>内边距和替换元素：可以向替换元素应用内边距。不论替换元素是块级元素还是行内元素，内边距都会围绕其内容，将背景色填入该内边距。</li>
+          </ol>
+        </div>
+      <div class="content">
+        <h3>颜色和背景</h3>
+        <div class="section">
+          <h4>颜色</h4>
+          <ol>
+            <li></li>
+          </ol>
+        </div>
+        <div class="section">
+          <h4>前景色</h4>
+          <ol>
+            <li></li>
+          </ol>
+        </div>
+        <div class="section">
+          <h4>背景</h4>
+          <ol>
+            <li></li>
+          </ol>
+        </div>
+      </div>
       </div>
     </div>
   </div>
