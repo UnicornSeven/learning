@@ -418,7 +418,15 @@
         <div class="section">
           <h4>定位</h4>
           <ol>
-            <li></li>
+            <li>定位的原理：定义元素框相对于父元素或者其正常位置的定位。</li>
+            <li>定位的类型，属性 position； 值 static | relative | absolute |fixed | inherit 应用于所有元素。不同类型的定位，会影响元素框的生成方式。<br>static 元素框正常生成，块级元素生成一个矩形框，作为文档流的一部分，行内元素则会创建一个或多个行框，置于其父元素中。<br>relative 元素框偏移某个距离 <br> absolute 元素框从文档流完全删除，并相对于其包含块定位 <br> fixed 元素框的表现将类似于将position设置为absolute，不过其包含块是视窗本身。<br>
+            </li>
+            <li>包含块：根元素：初始包含块由用户代理建立，是一个视窗大小的矩形；非根元素，按position值的不同，包含块的构成也不同：</li>
+            <li>偏移属性（offset properties） top | right | bottom | left 值 length | percentage | auto | inherit 应用于定位元素，正值会导致向内偏移，使边界朝着包含块的中心移动，而负值会导致向外偏移。</li>
+            <li>宽度和高度：为特定元素指定宽度和高度。可以使用偏移属性定位元素的同时设置元素大小。 倘若向元素增加了外边距、边框或内边距，定位元素会超过包含块。要想保证元素不超出其包含块，可以去除height和width声明，或者显式地将其设置为auto。</li>
+            <li>限制宽度和高度：最大最小属性（min-max properties）通过使用min-width、min-height和max-width、max-height可以为元素的内容区定义一个最小尺寸。应用于除非替换行内元素和表元素以外的所有元素。值不能为负。最小最大属性的一个好处是可以相对安全地混合使用不同的单位。</li>
+            <li>内容溢出和剪裁：如果一个元素的内容对于元素大小来说过大，就有可能溢出元素本身。可以使用overflow属性处理。值 visible | hidden | scroll | auto | inherit 应用于块级元素和替换元素。visible值允许元素的内容在元素框外可见；scroll允许内容下拉显示；hidden值会使元素的内容在元素框的边界处剪裁；auto值允许用户代理来确定采用何种行为。</li>
+            <li>内容裁剪：属性clip可以改变剪裁区域的形状。默认值auto表示元素的内容不应剪裁。值 rect(top, right, bottom, left) | auto | inherit 应用于绝对定位元素</li>
           </ol>
         </div>
       </div>
