@@ -399,6 +399,8 @@
             <li>背景图像的良好实践：只要有背景图像就应该同时包含一个背景颜色。</li>
             <li>有方向的重复： 属性 background-repeat；值 repeat | repeat-x | repeat-y | no-repeat | inherit 可以设置图像沿x轴水平平铺，也可以沿y轴垂直平铺，也可以不重复图像。</li>
             <li>背景定位：如何改变图像在背景中的位置。属性 background-position；值 percentage | length | left | center | right | top | bottom | inherit 应用于块级元素和替换元素。</br>图像放置利用关键字实现，位置关键字可以按任何顺序出现，只要保证不能超过两个关键字-一个对应水平方向，一个对应垂直方向。</br>百分数值：百分数值同时应用于元素和原图像。等价的位置关键字和百分数值。<br>长度值：在为原图像提供长度值时，这些长度值将解释为从元素内边距左上角的偏移，偏移点是原图像的左上角。如果使用长度值或百分数值，可以使用负值将原图像拉出元素的背景区。可以使用background-position属性设置平铺模式的起点。</li>
+            <li>关联：属性 background-attachment；值 scroll | fixed | inherit 防止用户滚动文档时图像消失，可以声明原图像是相对于可视区固定。例如设置background-attachment的值为fixed，可以使原图像不会随文档位置滚动，且原图像的放置由可视区的大小确定，而不是由包含该图像的元素的大小。</li>
+            <li>汇总：属性 background； 值 background-color | background-image | background-repeat | background-attachment | background-position 对background-position属性值有必须按水平值在前垂直值在后的顺序。background是一个简写属性，为指定属性值时会默认为none，其默认值会覆盖先前为给定元素指定的值。例如，设置除背景色不同的h1,h2 <code>h1,h2 { background: silver url(trees.ipg) center repeat-x; } h2 { background-color: silver; } 只会改变背景色，而不会覆盖所有其他值。 </code></li>
           </ol>
         </div>
       </div>
