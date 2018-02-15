@@ -427,6 +427,30 @@
             <li>限制宽度和高度：最大最小属性（min-max properties）通过使用min-width、min-height和max-width、max-height可以为元素的内容区定义一个最小尺寸。应用于除非替换行内元素和表元素以外的所有元素。值不能为负。最小最大属性的一个好处是可以相对安全地混合使用不同的单位。</li>
             <li>内容溢出和剪裁：如果一个元素的内容对于元素大小来说过大，就有可能溢出元素本身。可以使用overflow属性处理。值 visible | hidden | scroll | auto | inherit 应用于块级元素和替换元素。visible值允许元素的内容在元素框外可见；scroll允许内容下拉显示；hidden值会使元素的内容在元素框的边界处剪裁；auto值允许用户代理来确定采用何种行为。</li>
             <li>内容裁剪：属性clip可以改变剪裁区域的形状。默认值auto表示元素的内容不应剪裁。值 rect(top, right, bottom, left) | auto | inherit 应用于绝对定位元素</li>
+            <li>元素可见性：属性 visibility；值 visible | hidden | collapse | inherit 应用于所有元素，可继承。不同于display:none删除元素，visiblity: hidden只是使元素不可见，但不删除其元素框</li>
+            <li>绝对定位：元素绝对定位时，会从文档流中完全删除。绝对定位元素可能覆盖其他元素，或者被其他元素覆盖。绝对定位元素的包含块是最近的position值不为static的祖先元素，通常将position值指定为relative。强调一点，元素绝对定位时，会为其后代元素建立一个包含块。</li>
+            <li>绝对定位元素的放置和大小：元素框的高度和宽度由其外边距边界的放置决定，如果不显式设置包含块的宽度和高度</li>
+            <li>自动边偏移：元素绝对定位时，如果除bottom外某个任意偏移属性设置为auto，会有一种特殊的行为。</li>
+            <li>非替换元素的放置和大小：一般地，元素的大小和位置取决于其包含块。设置左右外边距为相等的值（或auto）会让绝对定位元素水平居中</li>
+            <li>替换元素的放置和大小：非替换元素和替换元素的定位规则大不相同。</br>
+            如果width设置为auto，width的实际使用值由元素内容的固有宽度决定。</br>
+            在从左向右读的语言中，如果left值为auto，要把auto替换为静态位置。在从右向左读的语言中，则把right的auto值替换为静态位置。</br>
+            如果left或right仍为auto，则将margin-left或margin-right的auto值替换为0。</br>
+            如果此时margin-left和margin-right都还定义为auto，则把它们设置为相等的值，从而将元素在其包含块中居中。</br>
+            在此之后，如果只剩下一个auto值，则将其修改为等于等式的余下部分。</br>
+            与非替换元素绝对定位时的基本行为相同。
+            </li>
+            <li>沿垂直轴的布局规则： <br>
+                如果height设置为auto，height的计算值由元素内容的固有高度确定。<br>
+                如果top的值为auto，将其替换为替换元素的静态位置<br>
+                如果bottom的值为auto，将margin-top或margin-bottom的所有auto值替换为0。<br>
+                如果此时margin-top和margin-bottom都还定义为auto，将其设置为相等的值，从而使元素在其包含块中居中。<br>
+                在此之后，如果仅剩下一个auto值，则将其修改为等于等式中的余下部分<br>
+                与非替换元素一样，如果值过度受限，用户代理会忽略bottom。
+            </li>
+            <li>Z轴上的放置：属性 z-index；值 integer | auto | inherit 应用于定位元素。利用z-index可以改变元素相互覆盖的顺序。<br> z轴为从前向后，越来越远离用户。在这个坐标系中，由较高z-index值的元素比z-index值较低的元素离读者更近。<br> 所有整数都可以用作z-index的值，包括负数。<br> 一旦为一个元素指定了z-index值，该元素就会建立自己的局部叠放上下文。元素相对于其父元素准确定位，而不是相对于总的文档。<br> 默认值为auto，不会建立新的局部叠放上下文。
+            </li>
+            <li>固定定位：</li>
           </ol>
         </div>
       </div>
