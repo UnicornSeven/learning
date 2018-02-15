@@ -460,12 +460,51 @@
         <h3>表布局</h3>
         <div class="section">
           <h4>表格式化</h4>
+          <ol>
+            <li>表格式化（table formatting）组装表的基本方法，并了解表中的元素相互之间有什么关系。</li>
+            <li>表的视觉编排：CSS对于表元素和内部表元素有很分明的界限。在CSS中，内部表元素生成有内容、内边距和边框的矩形框，但是没有外边距。表格单元构成了表布局的基础。</li>
+            <li>表编排规则：<br>
+                每个行框包含一行表格单元<br>
+                一个行组包含多少个行框，该行组框就包含多少个表格单元<br>
+                列框包含一列或多列表格单元。所有列框都按其出现的顺序依次相邻放置。<br>
+                列组中包含多少个列框，该列组框中就包含多少个表格单元。<br>
+                单元格可以跨多行或多列，由文档语言自行定义<br>
+                单元格框不能超出表或行组的最后一个行框。<br>
+            </li>
+            <li>表显示值：值table指定一个元素定义了一个块级表。属性 display；值 none | inline | block | inline-block | list-item | run-in | table | inline-table | table-row-group | table-row | table-column-group | table-column | table-cell | table-caption | inherit 应用于所有元素，初始值inline</li>
+            <li>以行为主（row primacy）标记语言会显示声明行，而列是从单元格行的布局推导出来的。</li>
+            <li>列：在CSS中列和列组只能接受4中样式：border、background、width、visibility。4个属性应用的特殊规则自行查询。</li>
+            <li>匿名表对象：CSS表模型中可能出现7种不同的匿名对象插入。类似于继承和特殊性，这7个规则作为一种机制，试图对CSS的表现方式赋予一种直观意义。</li>
+            <li>对象插入规则：</li>
+            <li>表层：<br>
+                表显示中使用的格式化层：单元格-行-行组-列-列组-表。默认地，所有元素背景都是透明的。
+            </li>
+            <li>表标题：表标题是一小段文本，描述了表内容的本质。属性 caption-side；值 top | bottom 应用于display值为table-caption的元素。</li>
+          </ol>
         </div>
         <div class="section">
           <h4>表单元格边框</h4>
+          <ol>
+            <li>分隔边框模型：单元格相互之间是分隔的。</li>
+            <li>合并边框模型：采用这种模型，单元格之间没有可见的间隔</li>
+            <li>属性：border-collapse；值 collapse | separate | inherit 应用于display值为table或inline-table的元素</li>
+            <li>分隔单元格边框：采用这种模型，表中的每个单元格都与其他单元格分开一定距离，而且单元格的边框彼此不会合并。</li>
+            <li>边框间隔：属性 border-spacing; 值 length | inherit 应用于display值为table或inline-table的元素，使表单元格边框分隔一段距离。如果提供两个值，则要求第一个值始终是水平间隔，第二个值始终是垂直间隔。在分隔边框模型中，不能为行、行组，列、列组设置边框。如果为这些元素声明了边框属性，都会被CSS兼容的用户代理所忽略。</li>
+            <li>处理空单元格：属性 empty-cells；值 show | hide | inherit 应用于display值为table-cell的元素。如果一行中的所有单元格都为空，而且empty-cells值都是hide，则整行将处理为好像这个行元素设置为display: none。</li>
+            <li>合并单元格：<br>
+                display值为table或inline-table的元素不能有任何内边距，不过它们可以有外边距。<br>
+                边框可以应用到单元格、行、行组、列和列组。表元素本身通常都有一个边框。<br>
+                单元格边框之间绝对不会有任何间隔。<br>
+                一旦合并，单元格之间的边框会在单元格间的假想表格线上居中
+            </li>
+            <li>合并边框布局：</li>
+          </ol>
         </div>
         <div class="section">
           <h4>表大小</h4>
+          <ol>
+            <li>宽度：</li>
+          </ol>
         </div>
       </div>
     </div>
