@@ -588,9 +588,25 @@
         </div>
         <div class="section">
           <h4>光标</h4>
+          <ol>
+            <li>用户界面的另一个重要部分是光标，对于提供交互反馈很有用。</li>
+            <li>CSS允许改变光标，利用cursor属性完成，可以更容易地利用非链接元素创建交互式、脚本驱动的屏幕部件，然后适当地改变图标。</li>
+            <li>指示和选择光标：值pointer会把光标图标改为与移过超链接时的光标相同。 <code>a[href] { cursor: pointer; }</code></li>
+            <li>text图标：提示用户能选择文本，作为一个视觉提示，指示用户可以拖动选择光标下的内容。</li>
+            <li>crosshair值：把光标图标变为一个十字符号。</li>
+            <li>移动光标：move值</li>
+            <li>等待和前进：wait和progress都指示程序正在忙。wait表示用户要等待直到程序不忙为止，而progress指示用户完全可以继续与程序交互。</li>
+          </ol>
         </div>
         <div class="section">
           <h4>轮廓</h4>
+          <ol>
+            <li>轮廓有点类似于边框，不过一轮廓不会影响文档流，二轮廓可能不是矩形，轮廓可以有不规则的形状。</li>
+            <li>属性：outline-style；值：none | dotted | dashed | solid | double | groove | ridge | inset | outset | inherit 应用于所有元素</li>
+            <li>轮廓宽度：属性：outline-width</li>
+            <li>设置轮廓颜色：属性：outline-color</li>
+            <li>汇总：属性：outline；值：[outline-color || outline-style || outline-width ] | inherit</li>
+          </ol>
         </div>
       </div>
       <div class="content">
