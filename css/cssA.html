@@ -531,11 +531,36 @@
             <li>插入生成内容：可以使用:before和:after伪元素，向文档中插入生成内容。注意，生成内容和元素内容之间没有空格，需要在声明中添加空格。可以利用规则在指向PDF文档的链接最后插一个小图标。<code>a.pdf-doc:after { content: url(pdf-doc-icon.gif); }</code></li>
             <li>使用限制：禁止浮动或定位:before和:after内容，禁止使用列表样式属性以及表属性。另外，如果选择器的主体是块级元素，则display属性只接受值none、inline、block和marker。其他值都处理为block。如果选择器的主体是一个行内元素，属性display值只能接受值none和inline。所有其他值都处理为inline。</li>
             <li>考虑生成内容的放置：生成内容框和实际内容框。生成内容作为块级元素跟行内元素，放置方式不同。</li>
-            <li>属性：content </li>
-            <div class="properties">
-              <img src="../images/css/content.png">
-            </div>
+            <li>指定内容：属性：content <br>
+                插入属性值：取一个元素的属性值，作为文档显示的一部分，可能会导致生成内容与具体内容冲突。为了解决这个问题，可以向声明增加一些串值。<code>a[href]:after { content: "[" attr(href) "]"; }</code> 所有属性值都可以作为生成内容插入，alt文本、class或id值，以及任何属性。<br>
+                生成引号：生成内容有一种特殊形式，即引号。CSS提供了open-quote等成对的content值以及属性quotes来管理生成的引号。
+                计数器：属性：counter-increment
+            </li>
           </ol>
+        </div>
+      </div>
+      <div class="content">
+        <h3>用户界面样式</h3>
+        <div class="section">
+          <h4>系统字体和颜色</h4>
+        </div>
+        <div class="section">
+          <h4>光标</h4>
+        </div>
+        <div class="section">
+          <h4>轮廓</h4>
+        </div>
+      </div>
+      <div class="content">
+        <h3>非屏幕媒体</h3>
+        <div class="section">
+          <h4>设计特定于媒体的样式表</h4>
+        </div>
+        <div class="section">
+          <h4>分页媒体</h4>
+        </div>
+        <div class="section">
+          <h4>声音样式</h4>
         </div>
       </div>
     </div>
