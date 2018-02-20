@@ -530,7 +530,11 @@
             <li>生成内容（generated content）由浏览器创建的内容，而不是由标志或内容来表示。例如，列表标志就是生成内容。</li>
             <li>插入生成内容：可以使用:before和:after伪元素，向文档中插入生成内容。注意，生成内容和元素内容之间没有空格，需要在声明中添加空格。可以利用规则在指向PDF文档的链接最后插一个小图标。<code>a.pdf-doc:after { content: url(pdf-doc-icon.gif); }</code></li>
             <li>使用限制：禁止浮动或定位:before和:after内容，禁止使用列表样式属性以及表属性。另外，如果选择器的主体是块级元素，则display属性只接受值none、inline、block和marker。其他值都处理为block。如果选择器的主体是一个行内元素，属性display值只能接受值none和inline。所有其他值都处理为inline。</li>
-            <li>考虑生成内容的放置：生成内容框和实际内容框</li>
+            <li>考虑生成内容的放置：生成内容框和实际内容框。生成内容作为块级元素跟行内元素，放置方式不同。</li>
+            <li>属性：content </li>
+            <div class="properties">
+              <img src="../images/css/content.png">
+            </div>
           </ol>
         </div>
       </div>
