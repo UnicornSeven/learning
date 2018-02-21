@@ -1334,6 +1334,187 @@
           </ol>
         </div>
       </div>
+      <div class="content">
+        <h3>复习</h3>
+        <div class="section">
+          <ol>
+            <li>database 数据库是一种保存有组织的数据的容器</li>
+            <li>table 某种特定类型数据的结构化清单 存储在表中的是同一种类型的数据或清单</li>
+            <li>schema 关于数据库和表的布局及特性的信息 模式用来定义数据库或表的一些特性，关于数据在表中如何存储，存储什么样的数据等</li>
+            <li>column 表中的一个字段（field） 所有表都是由一个或多个列组成的</li>
+            <li>row 表中的一个记录（record）</li>
+            <li>datatype 数据类型限制每个列表中存储什么类型的数据</li>
+            <li>primary key 主键：一列或一行列其值能够唯一标识表中的每一行</li>
+            <li>sql：structured query language 结构化查询语言：是一种专门用来与数据库沟通的语言，为了提供一种从数据库中读写数据的简单有效的方法</li>
+            <li>keyword 关键字：作为sql组成部分的保留字，每个sql语句都由一个或多个关键字构成</li>
+            <li>sql语句：不区分大小写；所有空格都被忽略；多条sql语句之间必须以分号分隔；</li>
+            <li>检索sql语句：检索单个列：必须给出两个条件，想选择什么以及从哪选择；检索多个列：列名之间必须以逗号分隔；检索所有列：使用星号通配符；</li>
+            <li>distinct 检索不同的值，使用关键字指示数据库只返回不同的值</li>
+            <li>limit 限制返回行数</li>
+            <li>offset 指示数据库从哪里开始检索，第一个被检索的行是第0行</li>
+            <li>clause 子句：sql语句有子句构成，一个子句通常由一个关键字加上所提供的数据组成</li>
+            <li>order by 对检索出的数据进行排序；位置：确保是最后一条子句；按多个列排序：简单指定列名，列名之间用逗号分开；指定排序方向：升序asc/降序desc，关键字只对指定列有效，必须对每一列指定</li>
+            <li>filter condition 过滤条件：根据需要指定搜索条件检索数据；操作符：=/!=/ > />= /< /<= / !></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ol>
+检索单个值：
+WHERE prod_price <= 10;
+
+不匹配检查：
+WHERE vend_id <> 'DLL01';
+
+范围值检查：
+BETWEEN 起始值 AND 结束值
+WHERE prod_price BETWEEN 5 AND 10;
+
+空值检查：
+WHERE prod_price IS NULL;
+
+logical operator
+用来联结或改变WHERE子句中的子句的关键字
+
+and
+用来指示检索满足所有给定条件的行
+
+or
+指示DBMS检索任一条件的行
+
+求值顺序
+圆括号> and > or
+WHERE (vend_id = 'DLL01' OR vend_id = 'BRS01') AND prod_price >= 10;
+
+in
+用来指定条件范围，in取一组由逗号分隔、括在圆括号中的合法值
+WHERE vend_id IN ('DLL01','BRS01');
+
+not
+否定其后跟的任何条件，用在要匹配的列前
+WHERE NOT vend_id = 'DLL01';
+
+wildcard
+通配符：用来匹配值的一部分的操作符
+本身是sql的where子句中有特殊含义的字符
+只能用于搜索文本字段（字符串）
+
+search pattern
+搜索模式：由字面值、通配符或两者组合构成的搜索条件
+
+predicate
+谓语：从技术上说like是谓语，而不是操作符
+
+like
+要使用通配符，必须使用like操作符
+
+%
+表示任何字符出现任意字数
+WHERE prod_name LIKE 'Fish%'
+
+_
+只能匹配一个字符
+WHERE prod_name LIKE '_ inch teddy bear';
+
+[ ]
+方括号通配符
+用来指定一个字符集，它必须匹配指定位置的一个字符
+WHERE cust_contact LIKE '[JM]%';
+
+^
+脱字符
+用来否定，例如不以J或M起头的联系人
+WHERE cust_contact LIKE '[^JM]%';
+
+计算字段：
+计算字段是运行时在select语句内创建的
+拼接字段+算术计算
+
+concatenate
+拼接字段：将值连接到一起构成单个值
+SELECT vend_name + vend_country
+SELECT CONCAT(vend_name, vend_country)
+
+TRIM()/RTRIM()/LTRIM()
+去空格
+SELECT RTRIM(vend_name) + RTRIM(vend_country) AS vend_title
+as vend_title指示sql语句创建一个包含指定计算结果的名为vend_title的计算字段，任何客户端都可以按名称引用这个字段
+
+执行算术计算
+对检索出的数据进行算术计算
+SELECT prod_price, quantity, prod_price*quantity AS expanded_price
+
+如何测试计算
+SELECT通常用于检索数据，但省略FROM子句后就是简单地访问和处理表达式
+SELECT TRIM('ab c');
+
+函数
+函数一般在数据上执行，为数据的转换和处理提供方便
+
+portable
+可移植：所编写的代码可以在多个系统上运行
+与sql语句不一样，sql函数是不可移植的
+
+函数类型：
+用于处理文本字符串的文本函数
+用于数值数据上进行算术操作的数值函数
+用于处理日期和时间值并从这些值中提取特定成分的日期和时间函数
+返回正使用的特殊信息的系统函数
+
+aggerate function
+聚集函数
+对某些行运行的函数，计算并返回一个值
+平均值/最大值/最小值/求和/返回某列的行数
+
+AVG()
+WHERE AVG(prod_price) AS avg_price
+WHERE AVG(DISTINCT prod_price) AS avg_price
+COUNT()
+SELECT COUNT(cust_email) AS num_cust
+SUM()
+SELECT SUM(quantity*prod_price) AS total_price
+
+group by
+创建分组：指示dbms分组数据，对每个组而不是整个结果集进行聚集
+位置：必须在where子句之后，order by子句之前
+除聚集函数外，select语句中的每一列都必须在group by子句中给出
+如果在select中使用表达式，则必须在子句中指定相同的表达式，不能使用别名
+
+having
+过滤分组
+区别：where子句在数据分组前进行过滤，having在数据分组后进行过滤
+使用having时应该结合group by子句，而where子句使用标准的行级过滤
+
+query
+查询：任何sql语句都是查询，但此术语一般指从单个数据表中检索数据的单条语句
+
+subquery
+子查询：嵌套在其他查询中的查询
+
+完全限定列名：来避免歧义
+指定表名和列名，语法上用一个句点分隔表名和列名
+
+联结
+关系表的设计就是要把信息分解成多个表，一类数据一个表，各表通过某些共同的值互相关联
+
+scale
+可伸缩：能够适应不断增加的工作量而不失败，设计良好的数据库或应用程序称为可伸缩性好
+
+联结
+联结是一种机制，用来在一条SELECT语句中关联表，因此称为联结
+将数据存储在多个表中，通过联结检索出数据
+创建联结：指定要联结的所有表以及要关联它们的方式
+select语句指定要关联的表的名字，where子句指示dbms将vendors表中的vend_id与products表中的vend_id匹配起来
+在联结两个表时，实际要做的是将第一个表中的每一行与第二个表中的每一行配对；where子句作为过滤条件，只包含那些匹配给定条件的行
+
+inner join
+内联结：联结条件用特定的on子句而不是where子句给出，传递给on的实际条件与传递给where的相同
+
+联结规则：
+首先列出所有表，然后定义表之间的关系
+
+        </div>
+      </div>
     </div>
   </div>
   <div class="footer">
