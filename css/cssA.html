@@ -617,10 +617,19 @@
             <li>CSS2可以应用于非视觉媒体，只要用户代理提供了适当的支持。</li>
             <li>设计特定于媒体的样式表：利用HTML和CSS中定义的机制，可以将样式表限制为仅用于某种特定的媒体。media属性可以接受一个媒体值或者媒体值表。</li>
             <li>在样式表本身，还可以在@import规则上限制媒体。 <code>@import url(visual.css) print, screen;</code></li>
+            <li>如果没有为样式表增加媒体信息，它会应用于所有媒体。需要为不同的媒体显示地增加媒体信息。</li>
           </ol>
         </div>
         <div class="section">
           <h4>分页媒体</h4>
+          <ol>
+            <li>分页媒体（paged medium）是把文档表示处理为一系列离散页面的媒体。</li>
+            <li>打印样式：创建专用于打印的样式。</li>
+            <li>屏幕与打印的区别：最基本的差别是字体选择；另一个主要区别在于字体大小。</li>
+            <li>定义页面大小：页面区（page area）类似于正常元素框中的内容区。外边距区（margin area）围绕页面区的部分。</li>
+            <li>选择页面类型：允许通过命名@page规则创建不同的页面类型。<code>@page normal { size: portrait；margin: 1in; }</code>指定打印模式纵向（portrait）或者横向(landscape)</li>
+            <li>分页：利用属性page-break-before和 page-break-after影响分页，它们接受同样的一组值。</li>
+          </ol>
         </div>
         <div class="section">
           <h4>声音样式</h4>
